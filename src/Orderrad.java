@@ -6,7 +6,6 @@ public class Orderrad {
 	private int antal;
 	private ArrayList<Produkt> produkter= new ArrayList<Produkt>();
 	
-	
 	public String getRadnummer() {
 		return radnummer;
 	}

@@ -4,7 +4,6 @@ public class Lager {
 
 	private String adress;
 	private ArrayList<Produkt> Lagerprodukter= new ArrayList<Produkt>();
-
 	
 	public String getAdress() {
 		return adress;

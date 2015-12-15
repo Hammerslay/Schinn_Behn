@@ -8,7 +8,6 @@ public class Order {
 	private ArrayList<Orderrad>orderrader= new ArrayList<Orderrad>();
 	private ArrayList<Produkt> orderprodukter = new ArrayList<Produkt>();
 	
-	
 	public String getOrdernr() {
 		return ordernr;
 	}

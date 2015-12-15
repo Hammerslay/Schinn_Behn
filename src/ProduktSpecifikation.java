@@ -4,7 +4,6 @@ public class ProduktSpecifikation {
 	private String ingredienser;
 	private String tillverkningsmetod;
 	
-	
 	public String getIngredienser() {
 		return ingredienser;
 	}

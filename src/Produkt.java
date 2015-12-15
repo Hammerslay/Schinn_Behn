@@ -3,11 +3,10 @@ import java.util.ArrayList;
 public class Produkt {
 	
 	private String namn;
-	private String varumärke;
+	private String varumarke;
 	private ArrayList<Order> ordrarprodukt= new ArrayList<Order>();
 	private ArrayList<Lager> produkterLager = new ArrayList<Lager>();
 	private ArrayList<ProduktSpecifikation> produktspecifikationer= new ArrayList<ProduktSpecifikation>();
-	
 	
 	public String getNamn() {
 		return namn;
@@ -16,10 +15,10 @@ public class Produkt {
 		this.namn = namn;
 	}
 	public String getVarumärke() {
-		return varumärke;
+		return varumarke;
 	}
-	public void setVarumärke(String varumärke) {
-		this.varumärke = varumärke;
+	public void setVarumärke(String varumarke) {
+		this.varumarke = varumarke;
 	}
 	public ArrayList<Order> getOrdrarprodukt() {
 		return ordrarprodukt;

@@ -4,7 +4,6 @@ public class Kundregister {
 	
 	private ArrayList<Kund> kunder = new ArrayList<Kund>();
 	
-	
 	public void setCustomer(ArrayList<Kund> kunder){
 		this.kunder=kunder;
 	}
