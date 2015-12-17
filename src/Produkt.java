@@ -7,17 +7,17 @@ public class Produkt {
 	private ArrayList<Order> ordrarprodukt= new ArrayList<Order>();
 	private ArrayList<Lager> produkterLager = new ArrayList<Lager>();
 	private ArrayList<ProduktSpecifikation> produktspecifikationer= new ArrayList<ProduktSpecifikation>();
-	
+	//Jakob
 	public String getNamn() {
 		return namn;
 	}
 	public void setNamn(String namn) {
 		this.namn = namn;
 	}
-	public String getVarumärke() {
+	public String getVarumarke() {
 		return varumarke;
 	}
-	public void setVarumärke(String varumarke) {
+	public void setVarumarke(String varumarke) {
 		this.varumarke = varumarke;
 	}
 	public ArrayList<Order> getOrdrarprodukt() {
