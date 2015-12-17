@@ -7,7 +7,7 @@ public class Produkt {
 	private ArrayList<Order> ordrarprodukt= new ArrayList<Order>();
 	private ArrayList<Lager> produkterLager = new ArrayList<Lager>();
 	private ArrayList<ProduktSpecifikation> produktspecifikationer= new ArrayList<ProduktSpecifikation>();
-	
+	//Jakob
 	public String getNamn() {
 		return namn;
 	}
