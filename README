@@ -1,0 +1,11 @@
+-----------------------------------------
+----- ÅTKOMST TILL SPECIFIK PRODUKT -----
+-----------------------------------------
+
+Main -> ProductRegister -> Product -> Warehouse -> Product
+
+1: Genom main skapar vi ett produktregister och fyller det med produkter.
+2: Genom produktregistret kommer vi åt en specifik produkt (T.ex. Korv A);
+3: Genom produkten kommer vi åt vilka lager den finns på.
+4: Genom lagret kommer vi åt den specifika produkt vi vill kolla på.
+5: Genom produkten kommer vi åt specifika attribut, som till exempel antal.
