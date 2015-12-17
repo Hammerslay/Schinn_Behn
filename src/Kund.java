@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 
 public class Kund {
-
+//chaima
 	private String namn;
 	private String kundnr;
 	private String efternamn;
