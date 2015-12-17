@@ -7,7 +7,6 @@ public class Product {
 	private int amount;
 	private String ingredients;
 	private String manufacturingMethod;
-	private HashMap<String, Order> productOrders= new HashMap<String, Order>();
 	private HashMap<String, Warehouse> warehouses= new HashMap<String, Warehouse>();
 	
 	
@@ -46,12 +45,6 @@ public class Product {
 	}
 	public void setManufacturingMethod(String manufacturingMethod) {
 		this.manufacturingMethod = manufacturingMethod;
-	}
-	public HashMap<String, Order> getProductOrders() {
-		return productOrders;
-	}
-	public void setProductOrders(HashMap<String, Order> productOrders) {
-		this.productOrders = productOrders;
 	}
 	public HashMap<String, Warehouse> getWarehouses() {
 		return warehouses;
