@@ -14,10 +14,10 @@ public class Produkt {
 	public void setNamn(String namn) {
 		this.namn = namn;
 	}
-	public String getVarumärke() {
+	public String getVarumarke() {
 		return varumarke;
 	}
-	public void setVarumärke(String varumarke) {
+	public void setVarumarke(String varumarke) {
 		this.varumarke = varumarke;
 	}
 	public ArrayList<Order> getOrdrarprodukt() {
