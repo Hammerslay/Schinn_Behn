@@ -1,11 +1,11 @@
------------------------------------------
------ ÅTKOMST TILL SPECIFIK PRODUKT -----
------------------------------------------
+----------------------------------------
+----- ACCESS TO A SPECIFIC PRODUCT -----
+----------------------------------------
 
 Main -> ProductRegister -> Product -> Warehouse -> Product
 
-1: Genom main skapar vi ett produktregister och fyller det med produkter.
-2: Genom produktregistret kommer vi åt en specifik produkt (T.ex. Korv A);
-3: Genom produkten kommer vi åt vilka lager den finns på.
-4: Genom lagret kommer vi åt den specifika produkt vi vill kolla på.
-5: Genom produkten kommer vi åt specifika attribut, som till exempel antal.
+1: Through the main class we create a ProductRegister and fill it with Products.
+2: Through the ProductRegister we gain access to a specific Product, for example Sausage A.
+3: Through the product we gain access to which WareHouse it is located at.
+4: Through the WareHouse we gain access to the specific Product that we want to look at.
+5: Through the specific Product we gain access to the specific attributes of that Product, for example amount.
