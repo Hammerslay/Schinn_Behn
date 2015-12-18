@@ -1,14 +1,14 @@
 import java.util.HashMap;
 
 public class ProductRegister {
-	private HashMap<String, Product> productsRegister= new HashMap<String,Product>();
+	private HashMap<String, Product> productRegister= new HashMap<String,Product>();
 
-	public HashMap<String, Product> getProductsRegister() {
-		return productsRegister;
+	public HashMap<String, Product> getProductRegister() {
+		return productRegister;
 	}
 
-	public void setProductsRegister(HashMap<String, Product> productsRegister) {
-		this.productsRegister = productsRegister;
+	public void setProductRegister(HashMap<String, Product> productRegister) {
+		this.productRegister = productRegister;
 	}
 
 }

@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class Warehouse {
 	private String address;
-	private HashMap<String, Product> warehouseProducts= new HashMap<String, Product>();
+	private HashMap<String, Product> warehouseProducts = new HashMap<String, Product>();
 	
 	
 	public String getAddress() {

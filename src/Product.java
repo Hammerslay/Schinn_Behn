@@ -7,7 +7,7 @@ public class Product {
 	private int amount;
 	private String ingredients;
 	private String manufacturingMethod;
-	private HashMap<String, Warehouse> warehouses= new HashMap<String, Warehouse>();
+	private HashMap<String, Warehouse> warehouses = new HashMap<String, Warehouse>();
 	
 	
 	public String getName() {

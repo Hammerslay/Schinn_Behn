@@ -3,13 +3,12 @@ import java.util.HashMap;
 public class Customer {
 	
 	private String customerNumber;
-	private String name;
+	private String firstName;
 	private String lastName;
 	private String billingAddress;
 	private String emailAddress;
 	private String phoneNumber;
 	private HashMap<String, Order> orders = new HashMap<String, Order>();
-	
 	
 	public String getCustomerNumber() {
 		return customerNumber;
@@ -17,11 +16,11 @@ public class Customer {
 	public void setCustomerNumber(String customerNumber) {
 		this.customerNumber = customerNumber;
 	}
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String name) {
+		this.firstName = name;
 	}
 	public String getLastName() {
 		return lastName;
@@ -53,5 +52,4 @@ public class Customer {
 	public void setOrders(HashMap<String, Order> orders) {
 		this.orders = orders;
 	}
-
 }

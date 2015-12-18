@@ -3,10 +3,10 @@ import java.util.HashMap;
 public class Order {
 	
 	private String orderNumber;
-	private String deliveryAdress;
+	private String deliveryAddress;
 	private String orderDate;
-	private Customer holder;
-	private HashMap<String, OrderLine> orderlines= new HashMap<String, OrderLine>();
+	private Customer customer;
+	private HashMap<String, OrderLine> orderLines= new HashMap<String, OrderLine>();
 	
 	public String getOrderNumber() {
 		return orderNumber;
@@ -14,11 +14,11 @@ public class Order {
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-	public String getDeliveryAdress() {
-		return deliveryAdress;
+	public String getDeliveryAddress() {
+		return deliveryAddress;
 	}
-	public void setDeliveryAdress(String deliveryAdress) {
-		this.deliveryAdress = deliveryAdress;
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 	public String getOrderDate() {
 		return orderDate;
@@ -26,17 +26,17 @@ public class Order {
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-	public Customer getHolder() {
-		return holder;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setHolder(Customer holder) {
-		this.holder = holder;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-	public HashMap<String, OrderLine> getOrderlines() {
-		return orderlines;
+	public HashMap<String, OrderLine> getOrderLines() {
+		return orderLines;
 	}
-	public void setOrderlines(HashMap<String, OrderLine> orderlines) {
-		this.orderlines = orderlines;
+	public void setOrderLines(HashMap<String, OrderLine> orderLines) {
+		this.orderLines = orderLines;
 	}
 	
 	
