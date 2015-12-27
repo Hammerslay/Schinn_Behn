@@ -15,8 +15,8 @@ public class ProductRegister {
 		return productRegister.get(name);
 	}
 	
-	public void addProduct(Product product) {
-		productRegister.put(product);
+	public void addProduct(String name, Product product) {
+		productRegister.put(name, product);
 	}
 	
 	public void deleteProduct(String name) {
