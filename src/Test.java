@@ -1,3 +1,4 @@
+import Is_projekt.Order;
 
 public class Test {
 
@@ -127,7 +128,9 @@ public class Test {
 			System.out.println(o.getBelongsTo().getFirstName());
 			
 		}
-	
+		for(Order o: kund1.getOrders()){
+			System.out.println(o.getOrderNumber());
+		}
 	
 	
 	}}
