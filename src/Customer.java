@@ -1,14 +1,13 @@
-import java.util.HashMap;
+import java.util.ArrayList;
+
 
 public class Customer {
-	
 	private String customerNumber;
 	private String firstName;
 	private String lastName;
-	private String billingAddress;
-	private String emailAddress;
+	private String deliveryAddress;
 	private String phoneNumber;
-	private HashMap<String, Order> orders = new HashMap<String, Order>();
+	private ArrayList<Order> orders = new ArrayList<Order>();
 	
 	public String getCustomerNumber() {
 		return customerNumber;
@@ -19,8 +18,8 @@ public class Customer {
 	public String getFirstName() {
 		return firstName;
 	}
-	public void setFirstName(String name) {
-		this.firstName = name;
+	public void setFirstName(String firstname) {
+		this.firstName = firstname;
 	}
 	public String getLastName() {
 		return lastName;
@@ -28,28 +27,31 @@ public class Customer {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getBillingAddress() {
-		return billingAddress;
-	}
-	public void setBillingAddress(String billingAddress) {
-		this.billingAddress = billingAddress;
-	}
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public HashMap<String, Order> getOrders() {
+	public ArrayList<Order> getOrders() {
 		return orders;
 	}
-	public void setOrders(HashMap<String, Order> orders) {
+	public void setOrders(ArrayList<Order> orders) {
 		this.orders = orders;
 	}
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+	public Customer(String customerNumber, String firstname, String lastname, String deliveryAddress,String phoneNumber){
+		   this.setCustomerNumber(customerNumber);
+		   this.setFirstName(firstname);
+		   this.setLastName(lastname);
+		   this.setDeliveryAddress(deliveryAddress);
+		   this.setPhoneNumber(phoneNumber);
+		   
+	}
+	
 }

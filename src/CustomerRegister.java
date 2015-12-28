@@ -1,27 +1,49 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class CustomerRegister {
-	
-	private HashMap<String, Customer> customers= new HashMap<String,Customer>();
+	private ArrayList<Customer> customers= new ArrayList<Customer>();
 
-	public HashMap<String, Customer> getCustomers() {
+	public ArrayList<Customer> getCustomers() {
 		return customers;
 	}
 
-	public void setHolders(HashMap<String, Customer> customers) {
+	public void setCustomers(ArrayList<Customer> customers) {
 		this.customers = customers;
 	}
-	public Customer findCustomer(String customerNumber){
-		return customers.get(customerNumber);
+
+	public void addCustomer(Customer newCustomer){
+		customers.add(newCustomer);
 	}
-	
 	public void deleteCustomer(String customerNumber){
 		Customer c = findCustomer(customerNumber);
 		if(c != null){
 			customers.remove(c);
 		}
+		
 	}
-	public void addCustomer(Customer c ){
-		customers.put(c.getCustomerNumber(), c);
+	public Customer findCustomer(String customerNumber){
+		for(Customer c: customers){
+			if(c.getCustomerNumber().equals(customerNumber)){
+				return c;
+			}
+		}
+		return null;
+	}
+	public void setCustomer(String customerNumber, String newFirstName, String newLastName, String newPhoneNumber, String newDeliveryAddress) { 
+		Customer c = this.findCustomer(customerNumber);
+		if (c != null) {
+	           c.setFirstName(newFirstName);
+	           c.setLastName(newLastName);
+	           c.setPhoneNumber(newPhoneNumber);
+	           c.setDeliveryAddress(newDeliveryAddress);
+	    
+	         }
+	}
+	public void changeCustomerDAddress(String customerNumber, String newDAddress) { 
+		Customer c = this.findCustomer(customerNumber);
+		if (c != null) {
+	           c.setDeliveryAddress(newDAddress);
+	    
+	         }
 	}
 }

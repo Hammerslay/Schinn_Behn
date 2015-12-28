@@ -1,28 +1,37 @@
-import java.util.HashMap;
-
 public class OrderLine {
-	
 	private String lineNumber;
 	private int amount;
-	private HashMap<String, Product> products = new HashMap<String, Product>();
+	private Order order;
+	private Product product;
 	
-	public String getLineNumber() {
-		return lineNumber;
-	}
-	public void setLineNumber(String lineNumber) {
-		this.lineNumber = lineNumber;
-	}
 	public int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public HashMap<String, Product> getProducts() {
-		return products;
+	public Product getProduct() {
+		return product;
 	}
-	public void setProducts(HashMap<String, Product> products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	public String getLineNumber() {
+		return lineNumber;
+	}
+	public void setLineNumber(String lineNumber) {
+		this.lineNumber = lineNumber;
+	}
+	public OrderLine(String lineNumber,Product product, int amount){
+		this.setLineNumber(lineNumber);
+		this.setProduct(product);
+		this.setAmount(amount);
+	}
+	
 }

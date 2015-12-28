@@ -1,14 +1,10 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Product {
+	//private String productNumber;
 	private String name;
-	private String brand;
-	private int price;
-	private int amount;
-	private String ingredients;
-	private String manufacturingMethod;
-	private HashMap<String, Warehouse> warehouses = new HashMap<String, Warehouse>();
-	
+	private double price;
+	private ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
 	
 	public String getName() {
 		return name;
@@ -16,41 +12,30 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBrand() {
-		return brand;
-	}
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getAmount() {
-		return amount;
+	
+	public Product(String name, double price){
+		//this.setProductNumber(productNumber);
+		this.setName(name);
+		this.setPrice(price);
+		
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public ArrayList<OrderLine> getOrderLines() {
+		return orderLines;
 	}
-	public String getIngredients() {
-		return ingredients;
+	public void setOrderLines(ArrayList<OrderLine> orderLines) {
+		this.orderLines = orderLines;
 	}
-	public void setIngredients(String ingredients) {
-		this.ingredients = ingredients;
+	/*public String getProductNumber() {
+		return productNumber;
 	}
-	public String getManufacturingMethod() {
-		return manufacturingMethod;
+	public void setProductNumber(String productNumber) {
+		this.productNumber = productNumber;
 	}
-	public void setManufacturingMethod(String manufacturingMethod) {
-		this.manufacturingMethod = manufacturingMethod;
-	}
-	public HashMap<String, Warehouse> getWarehouses() {
-		return warehouses;
-	}
-	public void setWarehouses(HashMap<String, Warehouse> warehouses) {
-		this.warehouses = warehouses;
-	}
-
+	*/
 }

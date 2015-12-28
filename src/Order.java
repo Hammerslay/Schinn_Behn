@@ -1,12 +1,10 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Order {
-	
 	private String orderNumber;
-	private String deliveryAddress;
-	private String orderDate;
-	private Customer customer;
-	private HashMap<String, OrderLine> orderLines= new HashMap<String, OrderLine>();
+	//private String orderDate;
+	private Customer belongsTo;
+	private ArrayList<OrderLine> orderrader= new ArrayList<OrderLine>();
 	
 	public String getOrderNumber() {
 		return orderNumber;
@@ -14,30 +12,65 @@ public class Order {
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-	public String getDeliveryAddress() {
-		return deliveryAddress;
-	}
-	public void setDeliveryAddress(String deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
-	public String getOrderDate() {
+	/*public String getOrderDate() {
 		return orderDate;
 	}
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
+	}*/
+	public Customer getBelongsTo() {
+		return belongsTo;
 	}
-	public Customer getCustomer() {
-		return customer;
+	public void setBelongsTo(Customer belongsTo) {
+		this.belongsTo = belongsTo;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public ArrayList<OrderLine> getOrderrader() {
+		return orderrader;
 	}
-	public HashMap<String, OrderLine> getOrderLines() {
-		return orderLines;
+	public void setOrderrader(ArrayList<OrderLine> orderrader) {
+		this.orderrader = orderrader;
 	}
-	public void setOrderLines(HashMap<String, OrderLine> orderLines) {
-		this.orderLines = orderLines;
+	public void addOrderLine(OrderLine newOrderLine){
+		this.orderrader.add(newOrderLine);
 	}
 	
+	public void deleteOrderLine(String lineNumber){
+		OrderLine ol=this.findOrderLine(lineNumber);
+		if(ol != null){
+			this.orderrader.remove(ol);
+		}
+	}
+	public OrderLine findOrderLine(String lineNumber){
+		for(OrderLine ol: this.orderrader){
+			if(ol.getLineNumber().equals(lineNumber)){
+				return ol;
+			}
+		}
+		return null;
+	}
+	public Order(String orderNumber){
+		this.setOrderNumber(orderNumber);
+		//this.setOrderDate(orderDate);
+		
+	}
 	
+	/*public void changeOrderLine(String lineNumber, int newAmount) { 
+		
+		OrderLine o = this.findOrderLine(lineNumber);
+		if (o != null) {
+			
+           o.setAmount(newAmount);
+    
+		}    
+	}*/
+		public void changeOrder(String lineNumber, int newAmount) { 
+			
+			OrderLine o = this.findOrderLine(lineNumber);
+			if (o != null) {
+				
+	           o.setAmount(newAmount);
+	    
+			}    
 }
+}
+
