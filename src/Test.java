@@ -4,8 +4,8 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		Customer customer1 = new Customer("0001","Anna","Svensson","Storgatan 2","040567834");
-		Customer customer2 = new Customer("0002","Bo","Andersson","Vindgatan 1","042674512");
+		Customer customer1 = new Customer("000001","Anna","Svensson","Storgatan 2","040567834");
+		Customer customer2 = new Customer("000002","Bo","Andersson","Vindgatan 1","042674512");
 		
 		Product product1= new Product("Julskinka 250g",45.40);
 		Product product2= new Product("Prinskorv 350g",60.50);
@@ -22,7 +22,6 @@ public class Test {
 		productRegister.add(product2);
 		productRegister.add(product3);
 		productRegister.add(product4);
-		
 		
 		OrderLine orderLine2= new OrderLine("Orderrad 2.",product3, 4);
 		OrderLine orderLine1 = new OrderLine("Orderrad 1", product4, 2);
@@ -57,7 +56,6 @@ public class Test {
 			
 		}
 		
-		
 		/*
 		System.out.println(order1.getBelongsTo().getFirstName());
 		System.out.println(order1.getOrderNumber());
@@ -68,10 +66,7 @@ public class Test {
 			System.out.println(o.getProduct().getPrice());
 			System.out.println(o.getAmount());
 		*/
-					
-					
-					
-					
+	
 		/*for(Customer c:kundregister.getCustomers()){
 			System.out.println(c.getFirstName());
 			System.out.println(c.getDeliveryAddress());
@@ -80,9 +75,7 @@ public class Test {
 		for(Product p: produktregister.getProdukter()){
 			System.out.println(p.getName());
 						
-			}
-					
-					
+			}		
 		/*
 		Order o = orderregister.findOrder("order1");
 		if(o != null){
@@ -94,7 +87,6 @@ public class Test {
 		if(or == null){
 			System.out.println("Fungerar!");
 		}*/
-		
 		
 		/*kundregister.changeCustomerDAddress("0001", "Marsgatan 3");
 		
@@ -121,8 +113,6 @@ public class Test {
 		}
 		*/
 		
-		
-		
 		for(Order o: orderRegister.getOrders()){
 			System.out.println(o.getOrderNumber());
 			System.out.println(o.getBelongsTo().getFirstName());
@@ -131,6 +121,5 @@ public class Test {
 		for(Order o: customer1.getOrders()){
 			System.out.println(o.getOrderNumber());
 		}
-	
-	
-	}}
+	}
+}
