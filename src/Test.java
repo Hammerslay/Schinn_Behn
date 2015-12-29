@@ -4,43 +4,43 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		Customer kund1 = new Customer("0001","Anna","Svensson","Storgatan 2","040567834");
-		Customer kund2 = new Customer("0002","Bo","Andersson","Vindgatan 1","042674512");
+		Customer customer1 = new Customer("0001","Anna","Svensson","Storgatan 2","040567834");
+		Customer customer2 = new Customer("0002","Bo","Andersson","Vindgatan 1","042674512");
 		
-		Product p1= new Product("Julskinka 250g",45.40);
-		Product p2= new Product("Prinskorv 350g",60.50);
-		Product p3= new Product("Offerlamm 450g",99.90);
-		Product p4= new Product("Kalvsylta 350g", 56.90);
+		Product product1= new Product("Julskinka 250g",45.40);
+		Product product2= new Product("Prinskorv 350g",60.50);
+		Product product3= new Product("Offerlamm 450g",99.90);
+		Product product4= new Product("Kalvsylta 350g", 56.90);
 		
-		CustomerRegister kundregister= new CustomerRegister();
-		ProductRegister produktregister= new ProductRegister();
+		CustomerRegister customerRegister= new CustomerRegister();
+		ProductRegister productRegister= new ProductRegister();
 		
-		kundregister.addCustomer(kund1);
-		kundregister.addCustomer(kund2);
+		customerRegister.addCustomer(customer1);
+		customerRegister.addCustomer(customer2);
 		
-		produktregister.add(p1);
-		produktregister.add(p2);
-		produktregister.add(p3);
-		produktregister.add(p4);
+		productRegister.add(product1);
+		productRegister.add(product2);
+		productRegister.add(product3);
+		productRegister.add(product4);
 		
 		
-		OrderLine orderrad2= new OrderLine("Orderrad 2.",p3, 4);
-		OrderLine orderrad1 = new OrderLine("Orderrad 1", p4, 2);
+		OrderLine orderLine2= new OrderLine("Orderrad 2.",product3, 4);
+		OrderLine orderLine1 = new OrderLine("Orderrad 1", product4, 2);
 		Order order1 = new Order("order nr.1");
-		Order order2=new Order("order nr.2");
-		Order order3=new Order("order nr.3");
+		Order order2 = new Order("order nr.2");
+		Order order3 = new Order("order nr.3");
 		
-		order1.addOrderLine(orderrad1);
-		order1.setBelongsTo(kund1);
-		order1.addOrderLine(orderrad2);
-		order2.setBelongsTo(kund1);
-		order3.setBelongsTo(kund1);
+		order1.addOrderLine(orderLine1);
+		order1.setBelongsTo(customer1);
+		order1.addOrderLine(orderLine2);
+		order2.setBelongsTo(customer1);
+		order3.setBelongsTo(customer1);
 		
-		OrderRegister orderregister= new OrderRegister();
+		OrderRegister orderRegister= new OrderRegister();
 		
-		orderregister.addOrder(order1);
-		orderregister.addOrder(order2);
-		orderregister.addOrder(order3);
+		orderRegister.addOrder(order1);
+		orderRegister.addOrder(order2);
+		orderRegister.addOrder(order3);
 		
 		/*for(OrderLine o: order1.getOrderrader()){
 			System.out.println(o.getLineNumber());
@@ -123,12 +123,12 @@ public class Test {
 		
 		
 		
-		for(Order o: orderregister.getOrders()){
+		for(Order o: orderRegister.getOrders()){
 			System.out.println(o.getOrderNumber());
 			System.out.println(o.getBelongsTo().getFirstName());
 			
 		}
-		for(Order o: kund1.getOrders()){
+		for(Order o: customer1.getOrders()){
 			System.out.println(o.getOrderNumber());
 		}
 	
