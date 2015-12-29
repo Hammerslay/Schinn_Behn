@@ -1,29 +1,28 @@
 
 import java.util.ArrayList;
 
-
 public class ProductRegister {
-	private ArrayList<Product> produkter= new ArrayList<Product>();
+	private ArrayList<Product> products= new ArrayList<Product>();
 
 	public ArrayList<Product> getProdukter() {
-		return produkter;
+		return products;
 	}
 
 	public void setProdukter(ArrayList<Product> produkter) {
-		this.produkter = produkter;
+		this.products = produkter;
 	}
 
 	public void add(Product newProduct){
-		produkter.add(newProduct);
+		products.add(newProduct);
 	}
 	public void delete(String name){
 		Product p = find(name);
 		if(p != null){
-			produkter.remove(p);
+			products.remove(p);
 		}
 	}
 	public Product find(String name){
-		for(Product p : produkter){
+		for(Product p : products){
 			if(p.getName().equals(name)){
 				return p;
 			}
@@ -38,9 +37,9 @@ public class ProductRegister {
 		}
 	}
 	public void setProductPrice(String productName, double newPrice) { 
-			Product p = this.find(productName);
-			if (p != null) {
-				p.setPrice(newPrice);
-			}
+		Product p = this.find(productName);
+		if (p != null) {
+			p.setPrice(newPrice);
+		}
 	}
 }

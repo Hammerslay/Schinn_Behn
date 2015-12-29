@@ -37,6 +37,8 @@ public class CustomerApplication {
 	
 	private Controller controller;
 	private CustomerRegister customerRegister;
+	
+	private ProductRegister productRegister; //Jakob la till
 	private JTextField textField_Amount;
 	private JTextField textField_OrderNumberorder;
 	private JTextField textField_Price;
@@ -76,7 +78,8 @@ public class CustomerApplication {
 		
 		
 		customerRegister = new CustomerRegister();
-		controller = new Controller(customerRegister, frmCustomer);
+		productRegister = new ProductRegister(); //Jakob la till
+		controller = new Controller(customerRegister, productRegister, frmCustomer);
 		frmCustomer.getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -240,7 +243,8 @@ public class CustomerApplication {
 		panel_Order.setForeground(Color.BLACK);
 		tabbedPane.addTab("Order", null, panel_Order, null);
 		panel_Order.setLayout(null);
-			
+		
+		//Här vill vi använda oss av en array med Product som kommer från ProductRegister
 		String[] products={"Prinskorv 250g","Offerlamm 500g","Leverkorv 350g" };
 		comboBox_Product = new JComboBox(products);
 	
@@ -249,7 +253,7 @@ public class CustomerApplication {
 		comboBox_Product.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int x =comboBox_Product.getSelectedIndex(); 
+				int x = comboBox_Product.getSelectedIndex(); 
 				
 				switch(x){
 				case 0:

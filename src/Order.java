@@ -4,7 +4,7 @@ public class Order {
 	private String orderNumber;
 	//private String orderDate;
 	private Customer belongsTo;
-	private ArrayList<OrderLine> orderrader= new ArrayList<OrderLine>();
+	private ArrayList<OrderLine> orderLines= new ArrayList<OrderLine>();
 	
 	public String getOrderNumber() {
 		return orderNumber;
@@ -25,23 +25,23 @@ public class Order {
 		this.belongsTo = belongsTo;
 	}
 	public ArrayList<OrderLine> getOrderrader() {
-		return orderrader;
+		return orderLines;
 	}
-	public void setOrderrader(ArrayList<OrderLine> orderrader) {
-		this.orderrader = orderrader;
+	public void setOrderLines(ArrayList<OrderLine> orderrader) {
+		this.orderLines = orderrader;
 	}
 	public void addOrderLine(OrderLine newOrderLine){
-		this.orderrader.add(newOrderLine);
+		this.orderLines.add(newOrderLine);
 	}
 	
 	public void deleteOrderLine(String lineNumber){
 		OrderLine ol=this.findOrderLine(lineNumber);
 		if(ol != null){
-			this.orderrader.remove(ol);
+			this.orderLines.remove(ol);
 		}
 	}
 	public OrderLine findOrderLine(String lineNumber){
-		for(OrderLine ol: this.orderrader){
+		for(OrderLine ol: this.orderLines){
 			if(ol.getLineNumber().equals(lineNumber)){
 				return ol;
 			}
@@ -63,14 +63,11 @@ public class Order {
     
 		}    
 	}*/
-		public void changeOrder(String lineNumber, int newAmount) { 
-			
-			OrderLine o = this.findOrderLine(lineNumber);
-			if (o != null) {
-				
-	           o.setAmount(newAmount);
-	    
-			}    
-}
+	public void changeOrder(String lineNumber, int newAmount) { 
+		OrderLine orderLine = this.findOrderLine(lineNumber);
+		if (orderLine != null) {
+           orderLine.setAmount(newAmount);
+		}    
+	}
 }
 
