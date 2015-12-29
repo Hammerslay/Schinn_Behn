@@ -5,14 +5,11 @@ public class Controller {
 	CustomerRegister customers;
 	JFrame customerFrame;
 	
-	
-	
 		public Controller(CustomerRegister customerReg,JFrame customerFrame){
 			this.customers = customerReg;
 			this.customerFrame = customerFrame;
-		
-			
 		}
+		
 		//Kanske skicka in en string array här istället?
 		public void addCustomer(String customerNumber, String firstName, String lastName, String phoneNumber, String deliveryAddress){
 			Customer tmpCustomer = new Customer(customerNumber,firstName,lastName,phoneNumber,deliveryAddress);
@@ -34,7 +31,6 @@ public class Controller {
 				aCust[2]=c.getLastName();
 				aCust[3]=c.getPhoneNumber();
 				aCust[4]=c.getDeliveryAddress();
-	  
 			}
 			return aCust;
 		}

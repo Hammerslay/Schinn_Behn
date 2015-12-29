@@ -35,7 +35,6 @@ public class CustomerApplication {
 	private JComboBox comboBox_Product;
 	private JLabel lblMsg;
 	
-	
 	private Controller controller;
 	private CustomerRegister customerRegister;
 	private JTextField textField_Amount;
@@ -148,7 +147,6 @@ public class CustomerApplication {
 				String customerNumber = textField_CustomerNbr.getText();
 				String[] tmpCustomer = controller.findCustomer(customerNumber);
 				
-					
 				if(tmpCustomer != null){
 					lblResponse.setText("Response:");
 					textField_CustomerNbr.setText(tmpCustomer[0]);
@@ -159,7 +157,6 @@ public class CustomerApplication {
 				}else if(tmpCustomer == null){
 					lblResponse.setText("Response: Customer not found!");
 				}
-				
 			}	
 		});
 		btnFindCustomer.setBounds(16, 300, 150, 29);
@@ -225,8 +222,7 @@ public class CustomerApplication {
 		
 		JButton btnViewOrder = new JButton("View Order");
 		btnViewOrder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
+			public void actionPerformed(ActionEvent e) {		
 			}
 		});
 		btnViewOrder.setBounds(434, 334, 138, 29);
@@ -244,10 +240,7 @@ public class CustomerApplication {
 		panel_Order.setForeground(Color.BLACK);
 		tabbedPane.addTab("Order", null, panel_Order, null);
 		panel_Order.setLayout(null);
-		
-		
-		
-		
+			
 		String[] products={"Prinskorv 250g","Offerlamm 500g","Leverkorv 350g" };
 		comboBox_Product = new JComboBox(products);
 	
@@ -258,14 +251,16 @@ public class CustomerApplication {
 				
 				int x =comboBox_Product.getSelectedIndex(); 
 				
-				if(x ==0){ //Kan kanske optimeras
+				switch(x){
+				case 0:
 					textField_Price.setText("234kr");
-				}
-				if(x==1){
+					break;
+				case 1:
 					textField_Price.setText("546kr");
-				}
-				if(x==2){
+					break;
+				case 2:
 					textField_Price.setText("300kr");
+					break;
 				}
 			}
 		});
@@ -274,7 +269,6 @@ public class CustomerApplication {
 		//comboBox_Product.addItem("Fisk");
 		//comboBox_Product.removeItem("Fisk");
 	
-
 		comboBox_Product.setBounds(128, 78, 154, 27);
 		panel_Order.add(comboBox_Product);
 		
@@ -362,7 +356,6 @@ public class CustomerApplication {
 				}
 				else{
 					lblMsg.setText("Delete Error!");
-					
 				}
 			}
 		});
@@ -381,7 +374,6 @@ public class CustomerApplication {
 					model.setValueAt(comboBox_Product.getSelectedItem(), i, 0);
 					model.setValueAt(textField_Price.getText(), i, 1);
 					model.setValueAt(textField_Amount.getText(), i, 2);
-					
 				}
 				else{
 					lblMsg.setText("Update Error!");
