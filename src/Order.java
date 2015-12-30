@@ -24,7 +24,7 @@ public class Order {
 	public void setBelongsTo(Customer belongsTo) {
 		this.belongsTo = belongsTo;
 	}
-	public ArrayList<OrderLine> getOrderrader() {
+	public ArrayList<OrderLine> getOrderLines() {
 		return orderLines;
 	}
 	public void setOrderLines(ArrayList<OrderLine> orderrader) {
