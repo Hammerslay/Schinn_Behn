@@ -41,6 +41,11 @@ public class Test {
 		orderRegister.addOrder(order2);
 		orderRegister.addOrder(order3);
 		
+		//Ny metod tillagd i Order för att kunna knyta specifika ordrar till en kund. /Jakob
+		customer1.addOrder(order1);
+		customer1.addOrder(order2);
+		customer1.addOrder(order3);
+		
 		/*for(OrderLine o: order1.getOrderrader()){
 			System.out.println(o.getLineNumber());
 			System.out.println(o.getProduct().getName());
@@ -113,11 +118,13 @@ public class Test {
 		}
 		*/
 		
-		for(Order o: orderRegister.getOrders()){
+		/*for(Order o: orderRegister.getOrders()){
 			System.out.println(o.getOrderNumber());
 			System.out.println(o.getBelongsTo().getFirstName());
 			
-		}
+		}*/
+		
+		//Nu går det fint att loopa igenom en kunds ordrar och presentera dem. /Jakob
 		for(Order o: customer1.getOrders()){
 			System.out.println(o.getOrderNumber());
 		}

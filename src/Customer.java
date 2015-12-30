@@ -39,6 +39,9 @@ public class Customer {
 	public void setOrders(ArrayList<Order> orders) {
 		this.orders = orders;
 	}
+	public void addOrder(Order newOrder){
+		this.orders.add(newOrder);
+	}
 	public String getDeliveryAddress() {
 		return deliveryAddress;
 	}
