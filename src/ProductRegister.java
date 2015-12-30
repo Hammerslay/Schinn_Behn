@@ -4,11 +4,11 @@ import java.util.ArrayList;
 public class ProductRegister {
 	private ArrayList<Product> products= new ArrayList<Product>();
 
-	public ArrayList<Product> getProdukter() {
+	public ArrayList<Product> getProducts() {
 		return products;
 	}
 
-	public void setProdukter(ArrayList<Product> produkter) {
+	public void setProducts(ArrayList<Product> produkter) {
 		this.products = produkter;
 	}
 

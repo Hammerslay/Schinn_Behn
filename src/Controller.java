@@ -1,46 +1,52 @@
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 public class Controller {
-	CustomerRegister customers;
-	ProductRegister products; //Jakob la till
+	CustomerRegister customerRegister;
+	ProductRegister productRegister; //Jakob la till
 	JFrame customerFrame;
 	
+	public Controller(CustomerRegister customerReg, ProductRegister productReg, JFrame customerFrame){
+		this.customerRegister = customerReg;
+		this.productRegister = productReg; //Jakob la till
+		this.customerFrame = customerFrame;
+		
+		productRegister.add(new Product("Prinskorv 250g", 234));
+		productRegister.add(new Product("Offerlamm 500g", 546));
+		productRegister.add(new Product("Leverkorv 350g", 300));
+	}
+	
 	public CustomerRegister getCustomers() {
-		return customers;
+		return customerRegister;
 	}
 
 	public void setCustomers(CustomerRegister customers) {
-		this.customers = customers;
+		this.customerRegister = customers;
 	}
 
-	public ProductRegister getProducts() {
-		return products;
+	public ProductRegister getProductRegister() {
+		return productRegister;
 	}
 
-	public void setProducts(ProductRegister products) {
-		this.products = products;
+	public void setProductRegister(ProductRegister products) {
+		this.productRegister = products;
 	}
 
-	public Controller(CustomerRegister customerReg, ProductRegister productReg, JFrame customerFrame){
-		this.customers = customerReg;
-		this.products = productReg; //Jakob la till
-		this.customerFrame = customerFrame;
-	}
-	
 	//Kanske skicka in en string-array här istället?
 	public void addCustomer(String customerNumber, String firstName, String lastName, String phoneNumber, String deliveryAddress){
 		Customer tmpCustomer = new Customer(customerNumber,firstName,lastName,phoneNumber,deliveryAddress);
-		customers.addCustomer(tmpCustomer);
+		customerRegister.addCustomer(tmpCustomer);
 	}
 	
 	public void deleteCustomer(String customerNumberDelete){
-		customers.deleteCustomer(customerNumberDelete);
+		customerRegister.deleteCustomer(customerNumberDelete);
 	}
 	public String[] findCustomer(String customerNumberFind){ //Bör inte den här funktionen returnera instansen och inte en array?
 		Customer c;
 		String[] aCust= null;
-		c= customers.findCustomer(customerNumberFind);
+		c= customerRegister.findCustomer(customerNumberFind);
 		
 		if(c != null){
 			aCust= new String[5];
@@ -53,9 +59,31 @@ public class Controller {
 		return aCust;
 	}
 	public void updateCustomer(String cNumber, String newFirstName, String newLastName, String newPhoneNumber, String newDeliveryAddress){
-		customers.setCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
+		customerRegister.setCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
 	}
 	public void reset(){
 		
+	}
+	
+	//NY METOD HÄR
+	public String[] getProductNames(){
+		ArrayList<String> productNames = new ArrayList<String>();
+		for(Product p: this.getProductRegister().getProducts()){
+			productNames.add(p.getName());
+		}
+		String[] listOfProducts = new String[this.getProductRegister().getProducts().size()];
+		for(int i = 0; i < this.getProductRegister().getProducts().size(); i++){
+			listOfProducts[i] = productNames.get(i);
+		}
+		return listOfProducts;
+	}
+	
+	//NY METOD HÄR
+	public ArrayList<Double> getProductPrices(){
+		ArrayList<Double> productPrices = new ArrayList<Double>();
+		for(Product p: this.getProductRegister().getProducts()){
+			productPrices.add(p.getPrice());
+		}
+		return productPrices;
 	}
 }

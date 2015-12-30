@@ -18,6 +18,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.awt.event.ItemEvent;
 
 public class CustomerApplication {
@@ -244,9 +245,24 @@ public class CustomerApplication {
 		tabbedPane.addTab("Order", null, panel_Order, null);
 		panel_Order.setLayout(null);
 		
-		//Här vill vi använda oss av en array med Product som kommer från ProductRegister
-		String[] products={"Prinskorv 250g","Offerlamm 500g","Leverkorv 350g" };
-		comboBox_Product = new JComboBox(products);
+		//Här vill vi använda oss av en array med Product som kommer från ProductRegister via Controller
+		/*ProductRegister productRegister = controller.getProductRegister();
+		ArrayList<Product> products = productRegister.getProducts();
+		
+		ArrayList<String> productNames = new ArrayList<String>();
+		ArrayList<Double> productPrices = new ArrayList<Double>();
+		for(Product p: products){
+			productNames.add(p.getName());
+			productPrices.add(p.getPrice());
+		}
+		
+		String[] listOfProducts = new String[products.size()];
+		for(int i = 0; i < products.size(); i++){
+			listOfProducts[i] = productNames.get(i);
+		}*/
+		
+		//String[] products1={"Prinskorv 250g","Offerlamm 500g","Leverkorv 350g" };
+		comboBox_Product = new JComboBox(controller.getProductNames());
 	
 		comboBox_Product.setSelectedIndex(0);
 		
@@ -254,8 +270,9 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 				
 				int x = comboBox_Product.getSelectedIndex(); 
+				textField_Price.setText(Double.toString(controller.getProductPrices().get(x)));
 				
-				switch(x){
+				/*switch(x){
 				case 0:
 					textField_Price.setText("234kr");
 					break;
@@ -265,7 +282,7 @@ public class CustomerApplication {
 				case 2:
 					textField_Price.setText("300kr");
 					break;
-				}
+				}*/
 			}
 		});
 		
