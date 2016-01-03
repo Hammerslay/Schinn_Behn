@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -35,6 +36,7 @@ public class CustomerApplication {
 	private JPanel panel_Customer;
 	private JComboBox comboBox_Product;
 	private JLabel lblMsg;
+	private JList list;
 	
 	private Controller controller;
 	private CustomerRegister customerRegister;
@@ -68,13 +70,21 @@ public class CustomerApplication {
 		initialize();
 	}
 
+	public void clearText(){
+		textField_CustomerNbr.setText(null);
+		textField_FirstName.setText(null);
+		textField_LastName.setText(null);
+		textField_PhoneNumber.setText(null);
+		textField_DeliveryAddress.setText(null);
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frmCustomer = new JFrame();
 		frmCustomer.setTitle("Schinn & Behn AB");
-		frmCustomer.setBounds(100, 100, 621, 457);
+		frmCustomer.setBounds(100, 100, 621, 521);
 		frmCustomer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -84,7 +94,7 @@ public class CustomerApplication {
 		frmCustomer.getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(6, 6, 609, 427);
+		tabbedPane.setBounds(6, 6, 609, 487);
 		frmCustomer.getContentPane().add(tabbedPane);
 		
 		JPanel panel_Customer = new JPanel();
@@ -152,18 +162,18 @@ public class CustomerApplication {
 				String[] tmpCustomer = controller.findCustomer(customerNumber);
 				
 				if(tmpCustomer != null){
-					lblResponse.setText("Response:");
+					lblResponse.setText("");
 					textField_CustomerNbr.setText(tmpCustomer[0]);
 					textField_FirstName.setText(tmpCustomer[1]);
 					textField_LastName.setText(tmpCustomer[2]);
 					textField_PhoneNumber.setText(tmpCustomer[3]);
 					textField_DeliveryAddress.setText(tmpCustomer[4]);
 				}else if(tmpCustomer == null){
-					lblResponse.setText("Response: Customer not found!");
+					lblResponse.setText("Customer not found!");
 				}
 			}	
 		});
-		btnFindCustomer.setBounds(16, 300, 150, 29);
+		btnFindCustomer.setBounds(16, 375, 150, 29);
 		panel_Customer.add(btnFindCustomer);
 		
 		JButton btnAddCustomer = new JButton("Add Customer");
@@ -175,10 +185,10 @@ public class CustomerApplication {
 				String phoneNumber= textField_PhoneNumber.getText();
 				String deliveryAddress= textField_DeliveryAddress.getText();
 				controller.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array här istället?
-				lblResponse.setText("Response: Stored Successfully!");
+				lblResponse.setText("Stored Successfully!");
 			}
 		});
-		btnAddCustomer.setBounds(173, 300, 150, 29);
+		btnAddCustomer.setBounds(173, 375, 150, 29);
 		panel_Customer.add(btnAddCustomer);
 		
 		JButton btnDeleteCustomer = new JButton("Delete Customer");
@@ -188,11 +198,11 @@ public class CustomerApplication {
 				String[]tmpCustomer = controller.findCustomer(customerNumber);
 				if(tmpCustomer != null){
 					controller.deleteCustomer(customerNumber);
-					lblResponse.setText("Response: Customer Deleted!");
+					lblResponse.setText("Customer Deleted!");
 				}
 			}
 		});
-		btnDeleteCustomer.setBounds(173, 334, 150, 29);
+		btnDeleteCustomer.setBounds(173, 416, 150, 29);
 		panel_Customer.add(btnDeleteCustomer);
 		
 		JButton btnUpdateCustomer = new JButton("Update Customer");
@@ -201,14 +211,14 @@ public class CustomerApplication {
 				String cNumber= textField_CustomerNbr.getText();
 				String[] tmpCustomer= controller.findCustomer(cNumber);
 				if(tmpCustomer != null){
-					lblResponse.setText("Response:");
+					lblResponse.setText("");
 					String newFirstName = textField_FirstName.getText();
 					String newLastName= textField_LastName.getText();
 					String newPhoneNumber= textField_PhoneNumber.getText();
 					String newDeliveryAddress = textField_DeliveryAddress.getText();
 					controller.updateCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
 				}else{
-					lblResponse.setText("Response: Customer not found");
+					lblResponse.setText("Customer not found!");
 				}
 			}
 		});
@@ -221,8 +231,18 @@ public class CustomerApplication {
 				
 			}
 		});
-		btnPlaceOrder.setBounds(434, 300, 138, 29);
+		btnPlaceOrder.setBounds(434, 375, 138, 29);
 		panel_Customer.add(btnPlaceOrder);
+		
+		JButton btnClearText = new JButton("Clear Text");
+		btnClearText.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				lblResponse.setText("");
+				clearText();
+			}
+		});
+		btnClearText.setBounds(434, 416, 138, 29);
+		panel_Customer.add(btnClearText);
 		
 		JButton btnViewOrder = new JButton("View Order");
 		btnViewOrder.addActionListener(new ActionListener() {
@@ -232,13 +252,23 @@ public class CustomerApplication {
 		btnViewOrder.setBounds(434, 334, 138, 29);
 		panel_Customer.add(btnViewOrder);
 		
-		lblResponse= new JLabel("Response:");
-		lblResponse.setBounds(27, 236, 545, 41);
+		lblResponse= new JLabel("");
+		lblResponse.setForeground(Color.BLUE);
+		lblResponse.setBounds(16, 332, 546, 12);
 		panel_Customer.add(lblResponse);
 		
 		JSeparator separator = new JSeparator(); //Linjen mellan knapparna och rutorna
-		separator.setBounds(27, 276, 535, 12);
+		separator.setBounds(16, 359, 546, 12);
 		panel_Customer.add(separator);
+		
+		//Den här ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi bör nog göra en JTable istället?
+		list = new JList(new String[]{"1", "2", "3", "4", "5", "6"});
+		list.setBounds(152, 246, 279, 84);
+		panel_Customer.add(list);
+		
+		JLabel lblOrders = new JLabel("Orders:");
+		lblOrders.setBounds(27, 255, 96, 21);
+		panel_Customer.add(lblOrders);
 		
 		panel_Order = new JPanel();
 		panel_Order.setForeground(Color.BLACK);
@@ -401,20 +431,29 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdate.setBounds(230, 203, 77, 32);
+		btnUpdate.setBounds(231, 206, 77, 29);
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
-		btnFindOrder.setBounds(288, 11, 117, 29);
+		btnFindOrder.setBounds(271, 11, 94, 29);
 		panel_Order.add(btnFindOrder);
 		
 		JButton btnAddOrder = new JButton("Add Order");
-		btnAddOrder.setBounds(412, 11, 117, 29);
+		btnAddOrder.setBounds(472, 11, 94, 29);
 		panel_Order.add(btnAddOrder);
 		
 		lblMsg = new JLabel("");
 		lblMsg.setForeground(Color.RED);
-		lblMsg.setBounds(334, 211, 213, 21);
+		lblMsg.setBounds(334, 230, 213, 21);
 		panel_Order.add(lblMsg);
+		
+		JButton btnDeleteOrder = new JButton("Delete Order");
+		btnDeleteOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Gör inget än
+			}
+		});
+		btnDeleteOrder.setBounds(366, 11, 110, 29);
+		panel_Order.add(btnDeleteOrder);
 	}
 }
