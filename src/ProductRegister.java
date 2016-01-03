@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class ProductRegister {
 	private ArrayList<Product> products= new ArrayList<Product>();
 
+	
 	public ArrayList<Product> getProducts() {
 		return products;
 	}

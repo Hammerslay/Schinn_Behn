@@ -54,7 +54,6 @@ public class Customer {
 		   this.setLastName(lastname);
 		   this.setDeliveryAddress(deliveryAddress);
 		   this.setPhoneNumber(phoneNumber);
-		   
 	}
 	
 }

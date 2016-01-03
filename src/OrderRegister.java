@@ -4,6 +4,28 @@ import java.util.ArrayList;
 	public class OrderRegister {
 	
 	private ArrayList<Order> orders= new ArrayList<Order>();
+	private ArrayList<String> orderNumbers = new ArrayList<String>();
+	private final int MAX_NUMBER_OF_ORDERS = 1000;
+
+	public OrderRegister(){
+		
+		//Konstruktorn 
+		for(int i = MAX_NUMBER_OF_ORDERS; i > 0; i--){
+			orderNumbers.add(Integer.toString(i));
+		}
+		
+	}
+	
+	//Ny metod för att generera ordernummer
+	private String generateNewOrderNumber(){
+		String tmpOrderNumber = orderNumbers.get(orderNumbers.size());
+		orderNumbers.remove(orderNumbers.size());
+		return tmpOrderNumber;
+	}
+	
+	public void releaseOrderNumber(){
+		
+	}
 
 	public ArrayList<Order> getOrders() {
 		return orders;
@@ -13,11 +35,15 @@ import java.util.ArrayList;
 		this.orders = orders;
 	}
 	public void addOrder(Order newOrder){
+		
+		//Tilldelar alla nya ordrar som skapas ett unikt ordernummer genom att köra generateNewOrderNumber-metoden.
+		newOrder.setOrderNumber(this.generateNewOrderNumber());  
 		orders.add(newOrder);
 	}
 	public void deleteOrder(String orderNumber){
 		Order o = findOrder(orderNumber);
 		if(o != null){
+			
 			orders.remove(o);
 		}
 	}
