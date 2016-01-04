@@ -184,7 +184,7 @@ public class CustomerApplication {
 				String lastName = textField_LastName.getText();
 				String phoneNumber= textField_PhoneNumber.getText();
 				String deliveryAddress= textField_DeliveryAddress.getText();
-				controller.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array här istället?
+				controller.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array hï¿½r istï¿½llet?
 				lblResponse.setText("Stored Successfully!");
 			}
 		});
@@ -262,8 +262,8 @@ public class CustomerApplication {
 		separator.setBounds(16, 359, 546, 12);
 		panel_Customer.add(separator);
 		
-		//Den här ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi bör nog göra en JTable istället?
-		//Man kan ha en scroller i Jlist om man vill kunna scrolla när det blir för många för att se.
+		//Den hï¿½r ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi bï¿½r nog gï¿½ra en JTable istï¿½llet?
+		//Man kan ha en scroller i Jlist om man vill kunna scrolla nï¿½r det blir fï¿½r mï¿½nga fï¿½r att se.
 		list = new JList(new String[]{"1", "2", "3", "4", "5", "6"});
 		list.setBounds(152, 246, 279, 84);
 		//list.getSelectedIndex();
@@ -315,7 +315,7 @@ public class CustomerApplication {
 		panel_Order.add(textField_OrderNumberorder);
 		textField_OrderNumberorder.setColumns(10);
 		
-		JLabel lblAmount = new JLabel("Amount:");
+		JLabel lblAmount = new JLabel("Quantity:");
 		lblAmount.setBounds(30, 160, 83, 21);
 		panel_Order.add(lblAmount);
 		
@@ -341,7 +341,7 @@ public class CustomerApplication {
 		table.setRowHeight(20);
 		
 		Object[] row =new Object[3];
-		JButton btnAdd = new JButton("Add");
+		JButton btnAdd = new JButton("Add Product");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -366,10 +366,10 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnAdd.setBounds(25, 206, 88, 29);
+		btnAdd.setBounds(25, 206, 154, 29);
 		panel_Order.add(btnAdd);
 		
-		JButton btnDelete = new JButton("Delete");
+		JButton btnDelete = new JButton("Delete Product");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -383,10 +383,10 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnDelete.setBounds(112, 374, 117, 29);
+		btnDelete.setBounds(165, 375, 117, 29);
 		panel_Order.add(btnDelete);
 		
-		JButton btnUpdate = new JButton("Update");
+		JButton btnUpdate = new JButton("Update Product");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -404,7 +404,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdate.setBounds(25, 374, 77, 29);
+		btnUpdate.setBounds(25, 374, 128, 29);
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
@@ -417,7 +417,7 @@ public class CustomerApplication {
 		btnFindOrder.setBounds(271, 11, 94, 29);
 		panel_Order.add(btnFindOrder);
 		
-		JButton btnAddOrder = new JButton("Add Order");
+		JButton btnAddOrder = new JButton("Place Order");
 		btnAddOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -434,7 +434,7 @@ public class CustomerApplication {
 				
 			}
 		});
-		btnAddOrder.setBounds(472, 11, 94, 29);
+		btnAddOrder.setBounds(472, 11, 99, 29);
 		panel_Order.add(btnAddOrder);
 		
 		lblMsg = new JLabel("");
@@ -445,7 +445,7 @@ public class CustomerApplication {
 		JButton btnDeleteOrder = new JButton("Delete Order");
 		btnDeleteOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Gör inget än
+				//Gï¿½r inget ï¿½n
 			}
 		});
 		btnDeleteOrder.setBounds(366, 11, 110, 29);
