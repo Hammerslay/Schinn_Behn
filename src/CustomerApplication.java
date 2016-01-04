@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import java.awt.CardLayout;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JSeparator;
@@ -421,6 +422,10 @@ public class CustomerApplication {
 		btnAddOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//TableModel tmpModel = table.getModel();
+				
+				int tmpInt = model.getRowCount();
+				
 				//Object tmp = model.getValueAt(0, 0);
 				Object tmp = row[0].getClass();
 				Object tmp2 = row[1].getClass();
@@ -430,7 +435,7 @@ public class CustomerApplication {
 				String tmpLine = (String)tmp2;
 				int tmpAmount = (int)tmp3; 
 				
-				OrderLine tmpOrderLine = new OrderLine("test", tmpProduct, 1);
+				OrderLine tmpOrderLine = new OrderLine(tmpLine, tmpProduct, tmpAmount);
 				
 			}
 		});
