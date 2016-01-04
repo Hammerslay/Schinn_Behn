@@ -202,7 +202,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnDeleteCustomer.setBounds(173, 416, 150, 29);
+		btnDeleteCustomer.setBounds(173, 406, 150, 29);
 		panel_Customer.add(btnDeleteCustomer);
 		
 		JButton btnUpdateCustomer = new JButton("Update Customer");
@@ -222,7 +222,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdateCustomer.setBounds(16, 334, 150, 29);
+		btnUpdateCustomer.setBounds(16, 406, 150, 29);
 		panel_Customer.add(btnUpdateCustomer);
 		
 		JButton btnPlaceOrder = new JButton("Place Order");
@@ -241,16 +241,16 @@ public class CustomerApplication {
 				clearText();
 			}
 		});
-		btnClearText.setBounds(434, 416, 138, 29);
+		btnClearText.setBounds(434, 406, 138, 29);
 		panel_Customer.add(btnClearText);
 		
-		JButton btnViewOrder = new JButton("View Order");
+		/*JButton btnViewOrder = new JButton("View Order");
 		btnViewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 			}
 		});
 		btnViewOrder.setBounds(434, 334, 138, 29);
-		panel_Customer.add(btnViewOrder);
+		panel_Customer.add(btnViewOrder);*/
 		
 		lblResponse= new JLabel("");
 		lblResponse.setForeground(Color.BLUE);
@@ -262,8 +262,10 @@ public class CustomerApplication {
 		panel_Customer.add(separator);
 		
 		//Den här ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi bör nog göra en JTable istället?
+		//Man kan ha en scroller i Jlist om man vill kunna scrolla när det blir för många för att se.
 		list = new JList(new String[]{"1", "2", "3", "4", "5", "6"});
 		list.setBounds(152, 246, 279, 84);
+		//list.getSelectedIndex();
 		panel_Customer.add(list);
 		
 		JLabel lblOrders = new JLabel("Orders:");
