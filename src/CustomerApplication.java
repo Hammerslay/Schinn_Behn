@@ -444,7 +444,7 @@ public class CustomerApplication {
 		
 		lblMsg = new JLabel("");
 		lblMsg.setForeground(Color.RED);
-		lblMsg.setBounds(349, 237, 201, 21);
+		lblMsg.setBounds(366, 237, 193, 21);
 		panel_Order.add(lblMsg);
 		
 		JButton btnDeleteOrder = new JButton("Delete Order");
