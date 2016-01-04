@@ -16,6 +16,7 @@ public class Controller {
 		productRegister.add(new Product("Prinskorv 250g", 234));
 		productRegister.add(new Product("Offerlamm 500g", 546));
 		productRegister.add(new Product("Leverkorv 350g", 300));
+		productRegister.add(new Product("", 0));
 	}
 	
 	public CustomerRegister getCustomers() {
@@ -34,7 +35,7 @@ public class Controller {
 		this.productRegister = products;
 	}
 
-	//Kanske skicka in en string-array här istället?
+	//Kanske skicka in en string-array hï¿½r istï¿½llet?
 	public void addCustomer(String customerNumber, String firstName, String lastName, String phoneNumber, String deliveryAddress){
 		Customer tmpCustomer = new Customer(customerNumber,firstName,lastName,phoneNumber,deliveryAddress);
 		customerRegister.addCustomer(tmpCustomer);
@@ -43,7 +44,7 @@ public class Controller {
 	public void deleteCustomer(String customerNumberDelete){
 		customerRegister.deleteCustomer(customerNumberDelete);
 	}
-	public String[] findCustomer(String customerNumberFind){ //Bör inte den här funktionen returnera instansen och inte en array?
+	public String[] findCustomer(String customerNumberFind){ //Bï¿½r inte den hï¿½r funktionen returnera instansen och inte en array?
 		Customer c;
 		String[] aCust= null;
 		c= customerRegister.findCustomer(customerNumberFind);
@@ -65,7 +66,7 @@ public class Controller {
 		
 	}
 	
-	//NY METOD HÄR
+	//NY METOD Hï¿½R
 	public String[] getProductNames(){
 		ArrayList<String> productNames = new ArrayList<String>();
 		for(Product p: this.getProductRegister().getProducts()){
@@ -78,7 +79,7 @@ public class Controller {
 		return listOfProducts;
 	}
 	
-	//NY METOD HÄR
+	//NY METOD Hï¿½R
 	public ArrayList<Double> getProductPrices(){
 		ArrayList<Double> productPrices = new ArrayList<Double>();
 		for(Product p: this.getProductRegister().getProducts()){

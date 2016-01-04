@@ -281,7 +281,7 @@ public class CustomerApplication {
 		
 		comboBox_Product = new JComboBox(controller.getProductNames());
 	
-		comboBox_Product.setSelectedIndex(0);
+		comboBox_Product.setSelectedIndex(3);
 		
 		comboBox_Product.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -335,7 +335,7 @@ public class CustomerApplication {
 		
 		table = new JTable(); //Listan med produkter man lagt till i varukorgen
 		scrollPane.setViewportView(table);
-		Object[]columns={"Product","Price","Amount"};
+		Object[]columns={"Product","Price","Quantity"};
 		DefaultTableModel model=new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		table.setModel(model);
