@@ -412,7 +412,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnDelete.setBounds(114, 206, 117, 29);
+		btnDelete.setBounds(112, 374, 117, 29);
 		panel_Order.add(btnDelete);
 		
 		JButton btnUpdate = new JButton("Update");
@@ -433,7 +433,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdate.setBounds(231, 206, 77, 29);
+		btnUpdate.setBounds(25, 374, 77, 29);
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
