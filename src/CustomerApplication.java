@@ -330,7 +330,7 @@ public class CustomerApplication {
 		textField_Price.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 247, 534, 116);
+		scrollPane.setBounds(25, 270, 534, 116);
 		panel_Order.add(scrollPane);
 		
 		table = new JTable(); //Listan med produkter man lagt till i varukorgen
@@ -367,7 +367,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnAdd.setBounds(25, 206, 154, 29);
+		btnAdd.setBounds(18, 229, 130, 29);
 		panel_Order.add(btnAdd);
 		
 		JButton btnDelete = new JButton("Delete Product");
@@ -384,7 +384,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnDelete.setBounds(165, 375, 117, 29);
+		btnDelete.setBounds(152, 398, 130, 29);
 		panel_Order.add(btnDelete);
 		
 		JButton btnUpdate = new JButton("Update Product");
@@ -405,7 +405,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdate.setBounds(25, 374, 128, 29);
+		btnUpdate.setBounds(16, 398, 130, 29);
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
@@ -444,7 +444,7 @@ public class CustomerApplication {
 		
 		lblMsg = new JLabel("");
 		lblMsg.setForeground(Color.RED);
-		lblMsg.setBounds(334, 230, 213, 21);
+		lblMsg.setBounds(349, 237, 201, 21);
 		panel_Order.add(lblMsg);
 		
 		JButton btnDeleteOrder = new JButton("Delete Order");
