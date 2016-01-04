@@ -228,7 +228,8 @@ public class CustomerApplication {
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//panel_Customer.setVisible(false);
+				//panel_Order.setVisible(true);
 			}
 		});
 		btnPlaceOrder.setBounds(434, 375, 138, 29);
@@ -277,23 +278,6 @@ public class CustomerApplication {
 		tabbedPane.addTab("Order", null, panel_Order, null);
 		panel_Order.setLayout(null);
 		
-		//Här vill vi använda oss av en array med Product som kommer från ProductRegister via Controller
-		/*ProductRegister productRegister = controller.getProductRegister();
-		ArrayList<Product> products = productRegister.getProducts();
-		
-		ArrayList<String> productNames = new ArrayList<String>();
-		ArrayList<Double> productPrices = new ArrayList<Double>();
-		for(Product p: products){
-			productNames.add(p.getName());
-			productPrices.add(p.getPrice());
-		}
-		
-		String[] listOfProducts = new String[products.size()];
-		for(int i = 0; i < products.size(); i++){
-			listOfProducts[i] = productNames.get(i);
-		}*/
-		
-		//String[] products1={"Prinskorv 250g","Offerlamm 500g","Leverkorv 350g" };
 		comboBox_Product = new JComboBox(controller.getProductNames());
 	
 		comboBox_Product.setSelectedIndex(0);
@@ -303,24 +287,8 @@ public class CustomerApplication {
 				
 				int x = comboBox_Product.getSelectedIndex(); 
 				textField_Price.setText(Double.toString(controller.getProductPrices().get(x)));
-				
-				/*switch(x){
-				case 0:
-					textField_Price.setText("234kr");
-					break;
-				case 1:
-					textField_Price.setText("546kr");
-					break;
-				case 2:
-					textField_Price.setText("300kr");
-					break;
-				}*/
 			}
 		});
-		
-		
-		//comboBox_Product.addItem("Fisk");
-		//comboBox_Product.removeItem("Fisk");
 	
 		comboBox_Product.setBounds(128, 78, 154, 27);
 		panel_Order.add(comboBox_Product);
@@ -377,22 +345,25 @@ public class CustomerApplication {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				if(textField_Amount.getText().equals("") && textField_Price.getText().equals("")){
+					lblMsg.setText("Select Product and Amount!");
+				}
+				else if(textField_Amount.getText().equals("")){
+					lblMsg.setText("Select Amount!");
+				}
+				else if(textField_Amount.getText().equals("")){
+					lblMsg.setText("Select Product!");
+				}
+				else{
 					lblMsg.setText(""); //Stoppa ner dessa fem rader kod i den sista if-satsen?
 					row[0]= comboBox_Product.getSelectedItem();
 					row[1]= textField_Price.getText();
 					row[2]= textField_Amount.getText();
-					model.addRow(row);	
+					model.addRow(row);
 					
-					if(textField_Amount.getText().equals("") && textField_Price.getText().equals("")){
-						lblMsg.setText("Select Product!");
-					}
-					else if(textField_Amount.getText().equals("")){
-						lblMsg.setText("Select Amount!");
-					}
-					else{
-						lblMsg.setText("");
-						textField_Amount.setText("");
-					}
+					lblMsg.setText("");
+					textField_Amount.setText("");
+				}
 			}
 		});
 		btnAdd.setBounds(25, 206, 88, 29);
@@ -437,10 +408,32 @@ public class CustomerApplication {
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
+		btnFindOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel_Customer.setVisible(true);
+				panel_Order.setVisible(false);
+			}
+		});
 		btnFindOrder.setBounds(271, 11, 94, 29);
 		panel_Order.add(btnFindOrder);
 		
 		JButton btnAddOrder = new JButton("Add Order");
+		btnAddOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Object tmp = model.getValueAt(0, 0);
+				Object tmp = row[0].getClass();
+				Object tmp2 = row[1].getClass();
+				Object tmp3 = row[2].getClass();
+						
+				Product tmpProduct = (Product)tmp;
+				String tmpLine = (String)tmp2;
+				int tmpAmount = (int)tmp3; 
+				
+				OrderLine tmpOrderLine = new OrderLine("test", tmpProduct, 1);
+				
+			}
+		});
 		btnAddOrder.setBounds(472, 11, 94, 29);
 		panel_Order.add(btnAddOrder);
 		
