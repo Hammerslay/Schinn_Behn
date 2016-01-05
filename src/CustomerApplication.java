@@ -41,8 +41,11 @@ public class CustomerApplication {
 	
 	private Controller controller;
 	private CustomerRegister customerRegister;
-	
 	private ProductRegister productRegister; //Jakob la till
+	private OrderRegister orderRegister;
+	
+	private Customer currentCustomer;
+	
 	private JTextField textField_Amount;
 	private JTextField textField_OrderNumberorder;
 	private JTextField textField_Price;
@@ -91,7 +94,8 @@ public class CustomerApplication {
 		
 		customerRegister = new CustomerRegister();
 		productRegister = new ProductRegister(); //Jakob la till
-		controller = new Controller(customerRegister, productRegister, frmCustomer);
+		orderRegister = new OrderRegister();
+		controller = new Controller(customerRegister, productRegister, orderRegister, frmCustomer);
 		frmCustomer.getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -160,7 +164,7 @@ public class CustomerApplication {
 		btnFindCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String customerNumber = textField_CustomerNbr.getText();
-				String[] tmpCustomer = controller.findCustomer(customerNumber);
+				String[] tmpCustomer = controller.returnCustomerInfo(customerNumber);
 				
 				if(tmpCustomer != null){
 					lblResponse.setText("");
@@ -169,6 +173,9 @@ public class CustomerApplication {
 					textField_LastName.setText(tmpCustomer[2]);
 					textField_PhoneNumber.setText(tmpCustomer[3]);
 					textField_DeliveryAddress.setText(tmpCustomer[4]);
+					
+					currentCustomer = controller.findCustomer(customerNumber);
+					
 				}else if(tmpCustomer == null){
 					lblResponse.setText("Customer not found!");
 				}
@@ -196,7 +203,7 @@ public class CustomerApplication {
 		btnDeleteCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String customerNumber =textField_CustomerNbr.getText();
-				String[]tmpCustomer = controller.findCustomer(customerNumber);
+				String[]tmpCustomer = controller.returnCustomerInfo(customerNumber);
 				if(tmpCustomer != null){
 					controller.deleteCustomer(customerNumber);
 					lblResponse.setText("Customer Deleted!");
@@ -210,7 +217,7 @@ public class CustomerApplication {
 		btnUpdateCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cNumber= textField_CustomerNbr.getText();
-				String[] tmpCustomer= controller.findCustomer(cNumber);
+				String[] tmpCustomer= controller.returnCustomerInfo(cNumber);
 				if(tmpCustomer != null){
 					lblResponse.setText("");
 					String newFirstName = textField_FirstName.getText();
@@ -422,20 +429,37 @@ public class CustomerApplication {
 		btnAddOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//TableModel tmpModel = table.getModel();
-				
-				int tmpInt = model.getRowCount();
-				
-				//Object tmp = model.getValueAt(0, 0);
-				Object tmp = row[0].getClass();
-				Object tmp2 = row[1].getClass();
-				Object tmp3 = row[2].getClass();
+				if(currentCustomer != null){
+					Order tmpOrder = new Order("");
+					
+					TableModel tmpModel = table.getModel();
+					int rows = tmpModel.getRowCount();
+					
+					for(int i = 0; i < rows; i++){
+						Object[] objects = new Object[3];
+						objects[0] = tmpModel.getValueAt(i, 0);
+						objects[1] = tmpModel.getValueAt(i, 1);
+						objects[2] = tmpModel.getValueAt(i, 2);
 						
-				Product tmpProduct = (Product)tmp;
-				String tmpLine = (String)tmp2;
-				int tmpAmount = (int)tmp3; 
-				
-				OrderLine tmpOrderLine = new OrderLine(tmpLine, tmpProduct, tmpAmount);
+						String tmpProductName = (String)objects[0];
+						String tmpPrice = (String)objects[1];
+						String tmpQuantity = (String)objects[2];
+						
+						Product tmpProduct = controller.getProductRegister().find(tmpProductName);
+						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));
+						tmpOrder.addOrderLine(tmpOrderLine);
+						
+						lblMsg.setForeground(Color.BLUE);
+						lblMsg.setText("Order placed!");
+					}
+					
+					tmpOrder.setBelongsTo(currentCustomer);
+					controller.getOrderRegister().addOrder(tmpOrder);
+				}
+				else{
+					lblMsg.setForeground(Color.RED);
+					lblMsg.setText("No selected customer!");
+				}
 				
 			}
 		});
