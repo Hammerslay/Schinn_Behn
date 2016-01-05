@@ -18,8 +18,8 @@ import java.util.ArrayList;
 	
 	//Ny metod för att generera ordernummer
 	private String generateNewOrderNumber(){
-		String tmpOrderNumber = orderNumbers.get(orderNumbers.size());
-		orderNumbers.remove(orderNumbers.size());
+		String tmpOrderNumber = orderNumbers.get(orderNumbers.size()-1);
+		orderNumbers.remove(orderNumbers.size()-1);
 		return tmpOrderNumber;
 	}
 	
