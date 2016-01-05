@@ -7,6 +7,11 @@ public class Controller {
 	CustomerRegister customerRegister;
 	ProductRegister productRegister; //Jakob la till
 	OrderRegister orderRegister; //Jakob la till;
+	
+	private ArrayList<String> orderNumbers = new ArrayList<String>();
+	private ArrayList<String> customerNumbers = new ArrayList<String>();
+	private final int ORDER_LIMIT = 1000;
+	private final int CUSTOMER_LIMIT = 1000;
 
 	JFrame customerFrame;
 	
@@ -16,10 +21,29 @@ public class Controller {
 		this.orderRegister = orderRegister; //Jakob la till
 		this.customerFrame = customerFrame;
 		
+		for(int i = ORDER_LIMIT; i > 0; i--){
+			orderNumbers.add(Integer.toString(i));
+		}
+		for(int i = CUSTOMER_LIMIT; i > 0; i--){
+			orderNumbers.add(Integer.toString(i));
+		}
+		
 		productRegister.add(new Product("Prinskorv 250g", 234));
 		productRegister.add(new Product("Offerlamm 500g", 546));
 		productRegister.add(new Product("Leverkorv 350g", 300));
 		productRegister.add(new Product("", 0));
+	}
+	
+	public String generateNewOrderNumber(){
+		String tmpOrderNumber = orderNumbers.get(orderNumbers.size()-1);
+		orderNumbers.remove(orderNumbers.size()-1);
+		return tmpOrderNumber;
+	}
+	
+	public String generateNewCustomerNumber(){
+		String tmpCustomerNumber = customerNumbers.get(customerNumbers.size()-1);
+		customerNumbers.remove(customerNumbers.size()-1);
+		return tmpCustomerNumber;
 	}
 	
 	public CustomerRegister getCustomers() {

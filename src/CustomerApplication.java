@@ -3,6 +3,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.CardLayout;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JLabel;
@@ -76,26 +79,30 @@ public class CustomerApplication {
 	}
 	
 	DefaultListModel dlm = new DefaultListModel();
-	
-	public void clearText(){
-		textField_CustomerNbr.setText(null);
-		textField_FirstName.setText(null);
-		textField_LastName.setText(null);
-		textField_PhoneNumber.setText(null);
-		textField_DeliveryAddress.setText(null);
-		dlm.clear();
-		list_1.setModel(dlm);
-	}
+	DefaultTableModel model=new DefaultTableModel();
+
 	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            //break;
+		        }
+		    }
+		} catch (Exception e) {
+		   
+			//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			// If Nimbus is not available, you can set the GUI to another look and feel.
+		}
+		
 		frmCustomer = new JFrame();
 		frmCustomer.setTitle("Schinn & Behn AB");
 		frmCustomer.setBounds(100, 100, 621, 521);
 		frmCustomer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		
 		customerRegister = new CustomerRegister();
 		productRegister = new ProductRegister(); //Jakob la till
@@ -193,7 +200,7 @@ public class CustomerApplication {
 					currentCustomer = controller.findCustomer(customerNumber);
 					
 					for(Order tmp: currentCustomer.getOrders()){
-						//dlm.addElement(tmp.getOrderNumber());
+						dlm.addElement(tmp.getOrderNumber());
 						//lblMsg.setText(tmp.getOrderNumber());
 					}
 					
@@ -208,13 +215,15 @@ public class CustomerApplication {
 		JButton btnAddCustomer = new JButton("Add Customer");
 		btnAddCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String customerNumber = textField_CustomerNbr.getText();
+				String customerNumber = controller.generateNewCustomerNumber();//textField_CustomerNbr.getText();
+				textField_CustomerNbr.setText(customerNumber);
 				String firstName= textField_FirstName.getText();
 				String lastName = textField_LastName.getText();
 				String phoneNumber= textField_PhoneNumber.getText();
 				String deliveryAddress= textField_DeliveryAddress.getText();
 				controller.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array hï¿½r istï¿½llet?
 				lblResponse.setText("Stored Successfully!");
+				currentCustomer = controller.findCustomer(customerNumber);
 			}
 		});
 		btnAddCustomer.setBounds(173, 375, 150, 29);
@@ -227,7 +236,9 @@ public class CustomerApplication {
 				String[]tmpCustomer = controller.returnCustomerInfo(customerNumber);
 				if(tmpCustomer != null){
 					controller.deleteCustomer(customerNumber);
+					currentCustomer = null;
 					lblResponse.setText("Customer Deleted!");
+					clearText();
 				}
 			}
 		});
@@ -290,11 +301,7 @@ public class CustomerApplication {
 		JSeparator separator = new JSeparator(); //Linjen mellan knapparna och rutorna
 		separator.setBounds(16, 359, 546, 12);
 		panel_Customer.add(separator);
-		
 
-		
-
-		
 		JLabel lblOrders = new JLabel("Orders:");
 		lblOrders.setBounds(27, 255, 96, 21);
 		panel_Customer.add(lblOrders);
@@ -367,7 +374,7 @@ public class CustomerApplication {
 		table = new JTable(); //Listan med produkter man lagt till i varukorgen
 		scrollPane.setViewportView(table);
 		Object[]columns={"Product","Price","Quantity"};
-		DefaultTableModel model=new DefaultTableModel();
+
 		model.setColumnIdentifiers(columns);
 		table.setModel(model);
 		table.setRowHeight(20);
@@ -393,7 +400,7 @@ public class CustomerApplication {
 					row[2]= textField_Amount.getText();
 					model.addRow(row);
 					
-					lblMsg.setText("");
+					lblMsg.setText(null);
 					textField_Amount.setText("");
 				}
 			}
@@ -455,7 +462,8 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(currentCustomer != null){
-					Order tmpOrder = new Order("");
+					Order tmpOrder = new Order(controller.generateNewOrderNumber());
+					tmpOrder.setBelongsTo(currentCustomer);
 					
 					TableModel tmpModel = table.getModel();
 					int rows = tmpModel.getRowCount();
@@ -476,18 +484,18 @@ public class CustomerApplication {
 					
 					}
 					
-					tmpOrder.setBelongsTo(currentCustomer);
 					controller.getOrderRegister().addOrder(tmpOrder); //Lägger till ordern i det STORA orderregistret som håller ALLAS ordrar.
 					currentCustomer.addOrder(tmpOrder); //Lägger till ordern hos den specifika kundens orderregister så att det går att hitta ordern genom kunden.
 					
-					ArrayList<Order> tmpOrders = currentCustomer.getOrders();
-					Order tmpOrderIgen = tmpOrders.get(0);
+					//ArrayList<Order> tmpOrders = currentCustomer.getOrders();
+					//Order tmpOrderIgen = tmpOrders.get(0);
 					
-					dlm.addElement(tmpOrderIgen.getOrderNumber());
+					dlm.addElement(tmpOrder.getOrderNumber());
 					//textField_OrderNumber.setText(tmpOrderIgen.getOrderNumber());
 					
 					lblMsg.setForeground(Color.BLUE);
 					lblMsg.setText("Order placed!");
+					clearOrder();
 				}
 				else{
 					lblMsg.setForeground(Color.RED);
@@ -513,4 +521,26 @@ public class CustomerApplication {
 		btnDeleteOrder.setBounds(366, 11, 110, 29);
 		panel_Order.add(btnDeleteOrder);
 	}
+	private void clearText(){
+		textField_CustomerNbr.setText(null);
+		textField_FirstName.setText(null);
+		textField_LastName.setText(null);
+		textField_PhoneNumber.setText(null);
+		textField_DeliveryAddress.setText(null);
+		dlm.clear();
+		list_1.setModel(dlm);
+	}
+	
+	//Gjorde Anna
+	private void clearOrder() {
+		comboBox_Product.setSelectedIndex(3);
+		textField_Price.setText(null);
+		textField_Amount.setText(null);
+		int tmp = model.getRowCount();
+		
+		for (int i = 0; i < tmp; i++) {
+			model.removeRow(i);
+		}
+	}
 }
+
