@@ -10,7 +10,7 @@ public class Controller {
 	
 	private ArrayList<String> orderNumbers = new ArrayList<String>();
 	private ArrayList<String> customerNumbers = new ArrayList<String>();
-	private final int ORDER_LIMIT = 1000;
+	private final int ORDER_LIMIT = 1000000;
 	private final int CUSTOMER_LIMIT = 1000;
 
 	JFrame customerFrame;
@@ -21,7 +21,7 @@ public class Controller {
 		this.orderRegister = orderRegister; //Jakob la till
 		this.customerFrame = customerFrame;
 		
-		for(int i = ORDER_LIMIT; i > 0; i--){
+		for(int i = ORDER_LIMIT; i > 1000; i--){
 			orderNumbers.add(Integer.toString(i));
 		}
 		for(int i = CUSTOMER_LIMIT; i > 0; i--){

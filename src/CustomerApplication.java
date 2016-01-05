@@ -443,7 +443,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdate.setBounds(16, 398, 130, 29);
+		btnUpdate.setBounds(25, 398, 123, 29);
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
@@ -484,8 +484,8 @@ public class CustomerApplication {
 					
 					}
 					
-					controller.getOrderRegister().addOrder(tmpOrder); //Lägger till ordern i det STORA orderregistret som håller ALLAS ordrar.
-					currentCustomer.addOrder(tmpOrder); //Lägger till ordern hos den specifika kundens orderregister så att det går att hitta ordern genom kunden.
+					controller.getOrderRegister().addOrder(tmpOrder); //Lï¿½gger till ordern i det STORA orderregistret som hï¿½ller ALLAS ordrar.
+					currentCustomer.addOrder(tmpOrder); //Lï¿½gger till ordern hos den specifika kundens orderregister sï¿½ att det gï¿½r att hitta ordern genom kunden.
 					
 					//ArrayList<Order> tmpOrders = currentCustomer.getOrders();
 					//Order tmpOrderIgen = tmpOrders.get(0);

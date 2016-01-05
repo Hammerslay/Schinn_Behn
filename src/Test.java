@@ -41,7 +41,7 @@ public class Test {
 		orderRegister.addOrder(order2);
 		orderRegister.addOrder(order3);
 		
-		//Ny metod tillagd i Order för att kunna knyta specifika ordrar till en kund. /Jakob
+		//Ny metod tillagd i Order fï¿½r att kunna knyta specifika ordrar till en kund. /Jakob
 		customer1.addOrder(order1);
 		customer1.addOrder(order2);
 		customer1.addOrder(order3);
@@ -122,15 +122,26 @@ public class Test {
 			System.out.println(o.getOrderNumber());
 			System.out.println(o.getBelongsTo().getFirstName());
 			
-		}*/
+		}
 		
-		//Nu går det fint att loopa igenom en kunds ordrar och presentera dem som nedan. /Jakob
+		//Nu gï¿½r det fint att loopa igenom en kunds ordrar och presentera dem som nedan. /Jakob
 		for(Order o: customer1.getOrders()){
 			System.out.println(o.getOrderNumber());
 			for(OrderLine ol: o.getOrderLines()){
 				System.out.println(ol.getLineNumber());
 				System.out.println(ol.getAmount());
 			}
+			customerRegister.setCustomer("000001", "Chaima", "Tebini", "6575", "malmÃ¶");
+			
+			Customer a =customerRegister.findCustomer("000001");
+			System.out.println(a.getFirstName());
+			System.out.println(a.getLastName());
+			System.out.println(a.getDeliveryAddress());*/
+		
+		for(int i = 1000; i > 0; i--){
+			System.out.println(i);
+		}
+			
 		}
 	}
-}
+
