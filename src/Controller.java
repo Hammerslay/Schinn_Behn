@@ -25,7 +25,7 @@ public class Controller {
 			orderNumbers.add(Integer.toString(i));
 		}
 		for(int i = CUSTOMER_LIMIT; i > 0; i--){
-			orderNumbers.add(Integer.toString(i));
+			customerNumbers.add(Integer.toString(i));
 		}
 		
 		productRegister.add(new Product("Prinskorv 250g", 234));
