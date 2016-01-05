@@ -6,17 +6,19 @@ import javax.swing.JFrame;
 public class Controller {
 	CustomerRegister customerRegister;
 	ProductRegister productRegister; //Jakob la till
+	OrderRegister orderRegister; //Jakob la till;
+
 	JFrame customerFrame;
 	
-	public Controller(CustomerRegister customerReg, ProductRegister productReg, JFrame customerFrame){
+	public Controller(CustomerRegister customerReg, ProductRegister productReg, OrderRegister orderRegister, JFrame customerFrame){
 		this.customerRegister = customerReg;
 		this.productRegister = productReg; //Jakob la till
+		this.orderRegister = orderRegister; //Jakob la till
 		this.customerFrame = customerFrame;
 		
 		productRegister.add(new Product("Prinskorv 250g", 234));
 		productRegister.add(new Product("Offerlamm 500g", 546));
 		productRegister.add(new Product("Leverkorv 350g", 300));
-		productRegister.add(new Product("", 0));
 	}
 	
 	public CustomerRegister getCustomers() {
@@ -34,6 +36,14 @@ public class Controller {
 	public void setProductRegister(ProductRegister products) {
 		this.productRegister = products;
 	}
+	
+	public OrderRegister getOrderRegister() {
+		return orderRegister;
+	}
+
+	public void setOrderRegister(OrderRegister orderRegister) {
+		this.orderRegister = orderRegister;
+	}
 
 	//Kanske skicka in en string-array h�r ist�llet?
 	public void addCustomer(String customerNumber, String firstName, String lastName, String phoneNumber, String deliveryAddress){
@@ -44,7 +54,7 @@ public class Controller {
 	public void deleteCustomer(String customerNumberDelete){
 		customerRegister.deleteCustomer(customerNumberDelete);
 	}
-	public String[] findCustomer(String customerNumberFind){ //B�r inte den h�r funktionen returnera instansen och inte en array?
+	public String[] returnCustomerInfo(String customerNumberFind){ //B�r inte den h�r funktionen returnera instansen och inte en array?
 		Customer c;
 		String[] aCust= null;
 		c= customerRegister.findCustomer(customerNumberFind);
@@ -86,5 +96,8 @@ public class Controller {
 			productPrices.add(p.getPrice());
 		}
 		return productPrices;
+	}
+	public Customer findCustomer(String customerNumber){
+		return this.customerRegister.findCustomer(customerNumber);
 	}
 }
