@@ -8,6 +8,7 @@ import javax.swing.table.TableModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JSeparator;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -37,7 +38,7 @@ public class CustomerApplication {
 	private JPanel panel_Customer;
 	private JComboBox comboBox_Product;
 	private JLabel lblMsg;
-	private JList list;
+	private JList list_1;
 	
 	private Controller controller;
 	private CustomerRegister customerRegister;
@@ -73,13 +74,17 @@ public class CustomerApplication {
 	public CustomerApplication() {
 		initialize();
 	}
-
+	
+	DefaultListModel dlm = new DefaultListModel();
+	
 	public void clearText(){
 		textField_CustomerNbr.setText(null);
 		textField_FirstName.setText(null);
 		textField_LastName.setText(null);
 		textField_PhoneNumber.setText(null);
 		textField_DeliveryAddress.setText(null);
+		dlm.clear();
+		list_1.setModel(dlm);
 	}
 	
 	/**
@@ -97,6 +102,17 @@ public class CustomerApplication {
 		orderRegister = new OrderRegister();
 		controller = new Controller(customerRegister, productRegister, orderRegister, frmCustomer);
 		frmCustomer.getContentPane().setLayout(null);
+		
+		//Den hï¿½r ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi bï¿½r nog gï¿½ra en JTable istï¿½llet?
+		//Man kan ha en scroller i Jlist om man vill kunna scrolla nï¿½r det blir fï¿½r mï¿½nga fï¿½r att se.
+		//list = new JList();
+		//list.setBounds(152, 246, 279, 84);
+
+		//list.getSelectedIndex();
+		//panel_Customer.add(list);
+		//list.setModel(dlm);
+		
+		
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(6, 6, 609, 487);
@@ -175,6 +191,11 @@ public class CustomerApplication {
 					textField_DeliveryAddress.setText(tmpCustomer[4]);
 					
 					currentCustomer = controller.findCustomer(customerNumber);
+					
+					for(Order tmp: currentCustomer.getOrders()){
+						//dlm.addElement(tmp.getOrderNumber());
+						//lblMsg.setText(tmp.getOrderNumber());
+					}
 					
 				}else if(tmpCustomer == null){
 					lblResponse.setText("Customer not found!");
@@ -270,16 +291,19 @@ public class CustomerApplication {
 		separator.setBounds(16, 359, 546, 12);
 		panel_Customer.add(separator);
 		
-		//Den hï¿½r ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi bï¿½r nog gï¿½ra en JTable istï¿½llet?
-		//Man kan ha en scroller i Jlist om man vill kunna scrolla nï¿½r det blir fï¿½r mï¿½nga fï¿½r att se.
-		list = new JList(new String[]{"1", "2", "3", "4", "5", "6"});
-		list.setBounds(152, 246, 279, 84);
-		//list.getSelectedIndex();
-		panel_Customer.add(list);
+
+		
+
 		
 		JLabel lblOrders = new JLabel("Orders:");
 		lblOrders.setBounds(27, 255, 96, 21);
 		panel_Customer.add(lblOrders);
+		
+		list_1 = new JList();
+		list_1.setBounds(152, 257, 279, 82);
+		panel_Customer.add(list_1);
+		DefaultListModel dlm = new DefaultListModel();
+		list_1.setModel(dlm);
 		
 		panel_Order = new JPanel();
 		panel_Order.setForeground(Color.BLACK);
@@ -288,7 +312,7 @@ public class CustomerApplication {
 		
 		comboBox_Product = new JComboBox(controller.getProductNames());
 	
-		comboBox_Product.setSelectedIndex(0);
+		comboBox_Product.setSelectedIndex(3);
 		
 		comboBox_Product.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -418,6 +442,7 @@ public class CustomerApplication {
 		JButton btnFindOrder = new JButton("Find Order");
 		btnFindOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+								
 				panel_Customer.setVisible(true);
 				panel_Order.setVisible(false);
 			}
@@ -448,13 +473,21 @@ public class CustomerApplication {
 						Product tmpProduct = controller.getProductRegister().find(tmpProductName);
 						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));
 						tmpOrder.addOrderLine(tmpOrderLine);
-						
-						lblMsg.setForeground(Color.BLUE);
-						lblMsg.setText("Order placed!");
+					
 					}
 					
 					tmpOrder.setBelongsTo(currentCustomer);
-					controller.getOrderRegister().addOrder(tmpOrder);
+					controller.getOrderRegister().addOrder(tmpOrder); //Lägger till ordern i det STORA orderregistret som håller ALLAS ordrar.
+					currentCustomer.addOrder(tmpOrder); //Lägger till ordern hos den specifika kundens orderregister så att det går att hitta ordern genom kunden.
+					
+					ArrayList<Order> tmpOrders = currentCustomer.getOrders();
+					Order tmpOrderIgen = tmpOrders.get(0);
+					
+					dlm.addElement(tmpOrderIgen.getOrderNumber());
+					//textField_OrderNumber.setText(tmpOrderIgen.getOrderNumber());
+					
+					lblMsg.setForeground(Color.BLUE);
+					lblMsg.setText("Order placed!");
 				}
 				else{
 					lblMsg.setForeground(Color.RED);

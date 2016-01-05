@@ -3,6 +3,11 @@ import java.util.ArrayList;
 public class CustomerRegister {
 	private ArrayList<Customer> customers= new ArrayList<Customer>();
 
+	public CustomerRegister(){
+		this.addCustomer(new Customer("1234", "Anna", "Andersson", "1111111111", "Storgatan 1"));
+		this.addCustomer(new Customer("5678", "Sven", "Svensson", "2222222222", "Storgatan 2"));
+	}
+	
 	public ArrayList<Customer> getCustomers() {
 		return customers;
 	}
