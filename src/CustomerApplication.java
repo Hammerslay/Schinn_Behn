@@ -288,7 +288,7 @@ public class CustomerApplication {
 		
 		comboBox_Product = new JComboBox(controller.getProductNames());
 	
-		comboBox_Product.setSelectedIndex(3);
+		comboBox_Product.setSelectedIndex(0);
 		
 		comboBox_Product.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
