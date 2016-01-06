@@ -49,6 +49,7 @@ public class CustomerApplication {
 	private OrderRegister orderRegister;
 	
 	private Customer currentCustomer;
+	private Order currentOrder;
 	
 	private JTextField textField_Amount;
 	private JTextField textField_OrderNumberorder;
@@ -186,28 +187,52 @@ public class CustomerApplication {
 		JButton btnFindCustomer = new JButton("Find Customer");
 		btnFindCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String customerNumber = textField_CustomerNbr.getText();
-				String[] tmpCustomer = controller.returnCustomerInfo(customerNumber);
 				
-				if(tmpCustomer != null){
-					lblResponse.setText("");
-					textField_CustomerNbr.setText(tmpCustomer[0]);
-					textField_FirstName.setText(tmpCustomer[1]);
-					textField_LastName.setText(tmpCustomer[2]);
-					textField_PhoneNumber.setText(tmpCustomer[3]);
-					textField_DeliveryAddress.setText(tmpCustomer[4]);
+				String tmpCustomerNumber = textField_CustomerNbr.getText();
+				String tmpOrderNumber = textField_OrderNumber.getText();
 					
-					currentCustomer = controller.findCustomer(customerNumber);
-					
-					for(Order tmp: currentCustomer.getOrders()){
-						dlm.addElement(tmp.getOrderNumber());
-						//lblMsg.setText(tmp.getOrderNumber());
+			
+				String[] tmpOrder =controller.returnCustomerByOrderNumber(tmpOrderNumber);	
+				String[] tmpCustomer = controller.returnCustomerInfo(tmpCustomerNumber);
+				
+					if(tmpCustomer != null){
+						lblResponse.setText("");
+						textField_CustomerNbr.setText(tmpCustomer[0]);
+						textField_FirstName.setText(tmpCustomer[1]);
+						textField_LastName.setText(tmpCustomer[2]);
+						textField_PhoneNumber.setText(tmpCustomer[3]);
+						textField_DeliveryAddress.setText(tmpCustomer[4]);
+						
+						currentCustomer = controller.findCustomer(tmpCustomerNumber);
+						
+						for(Order tmp: currentCustomer.getOrders()){
+							dlm.addElement(tmp.getOrderNumber());
+							//lblMsg.setText(tmp.getOrderNumber());
+						}
+						
+					//else if(tmpCustomer.equals(null)){
+					//	lblResponse.setText("Customer not found!");
+					//}
 					}
-					
-				}else if(tmpCustomer == null){
-					lblResponse.setText("Customer not found!");
-				}
-			}	
+					else if(tmpOrderNumber != null){
+							
+							textField_OrderNumber.setText(tmpOrder[0]);
+							textField_CustomerNbr.setText(tmpOrder[1]);
+							textField_FirstName.setText(tmpOrder[2]);
+							textField_LastName.setText(tmpOrder[3]);
+							textField_PhoneNumber.setText(tmpOrder[4]);
+							textField_DeliveryAddress.setText(tmpOrder[5]);
+							
+							currentCustomer = controller.findCustomer(tmpOrder[1]);
+							for(Order tmp: currentCustomer.getOrders()){
+								dlm.addElement(tmp.getOrderNumber());
+							}
+							
+							
+						}
+					}
+				
+				
 		});
 		btnFindCustomer.setBounds(16, 375, 150, 29);
 		panel_Customer.add(btnFindCustomer);
@@ -405,7 +430,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnAdd.setBounds(18, 229, 130, 29);
+		btnAdd.setBounds(25, 229, 123, 29);
 		panel_Order.add(btnAdd);
 		
 		JButton btnDelete = new JButton("Delete Product");
@@ -449,12 +474,43 @@ public class CustomerApplication {
 		JButton btnFindOrder = new JButton("Find Order");
 		btnFindOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+					
+				String tmpOrderNumber = textField_OrderNumberorder.getText();
+				Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
+				
+				if(tmpOrder != null){
+					currentOrder = tmpOrder;
+					ArrayList<OrderLine> tmpOrderLines = tmpOrder.getOrderLines();
+					
+					int i = 0;
+						for(OrderLine o: tmpOrderLines){
 								
-				panel_Customer.setVisible(true);
-				panel_Order.setVisible(false);
+							//Object tmpLineNumber = o.getLineNumber();
+							Object tmpProductName = o.getProduct().getName();
+							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
+							Object tmpAmount = o.getAmount();
+							
+							Object[] tmpObjects= new Object[3];
+							
+							model.addRow(tmpObjects);
+							
+							model.setValueAt(tmpProductName, i, 0);
+							model.setValueAt(tmpProductPrice, i, 1);
+							model.setValueAt(tmpAmount, i, 2);
+							
+							i++;
+						}
+				}
+				else{
+					lblMsg.setForeground(Color.RED);
+					lblMsg.setText("Order not found!");
+				}
+				
+				//panel_Customer.setVisible(true);
+				//panel_Order.setVisible(false);
 			}
 		});
-		btnFindOrder.setBounds(271, 11, 94, 29);
+		btnFindOrder.setBounds(287, 10, 94, 29);
 		panel_Order.add(btnFindOrder);
 		
 		JButton btnAddOrder = new JButton("Place Order");
@@ -504,7 +560,7 @@ public class CustomerApplication {
 				
 			}
 		});
-		btnAddOrder.setBounds(472, 11, 99, 29);
+		btnAddOrder.setBounds(459, 397, 99, 29);
 		panel_Order.add(btnAddOrder);
 		
 		lblMsg = new JLabel("");
@@ -515,10 +571,23 @@ public class CustomerApplication {
 		JButton btnDeleteOrder = new JButton("Delete Order");
 		btnDeleteOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//G�r inget �n
+				if(currentOrder != null){
+					controller.getOrderRegister().deleteOrder(currentOrder.getOrderNumber());
+					currentCustomer.deleteOrder(currentOrder.getOrderNumber());
+					dlm.removeElement(currentOrder.getOrderNumber());
+					clearOrder();
+					currentOrder = null;
+					
+					lblMsg.setForeground(Color.BLUE);
+					lblMsg.setText("Order deleted!");
+				}
+				else{
+					lblMsg.setForeground(Color.RED);
+					lblMsg.setText("No order selected!");
+				}
 			}
 		});
-		btnDeleteOrder.setBounds(366, 11, 110, 29);
+		btnDeleteOrder.setBounds(398, 10, 94, 29);
 		panel_Order.add(btnDeleteOrder);
 	}
 	private void clearText(){
@@ -527,6 +596,7 @@ public class CustomerApplication {
 		textField_LastName.setText(null);
 		textField_PhoneNumber.setText(null);
 		textField_DeliveryAddress.setText(null);
+		textField_OrderNumber.setText(null);
 		dlm.clear();
 		list_1.setModel(dlm);
 	}
@@ -536,10 +606,11 @@ public class CustomerApplication {
 		comboBox_Product.setSelectedIndex(3);
 		textField_Price.setText(null);
 		textField_Amount.setText(null);
+		textField_OrderNumberorder.setText(null);
 		int tmp = model.getRowCount();
 		
 		for (int i = 0; i < tmp; i++) {
-			model.removeRow(i);
+			model.removeRow(0);
 		}
 	}
 }

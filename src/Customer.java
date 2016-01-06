@@ -55,5 +55,20 @@ public class Customer {
 		   this.setDeliveryAddress(deliveryAddress);
 		   this.setPhoneNumber(phoneNumber);
 	}
+	public void deleteOrder(String orderNumber){
+		Order o = findOrder(orderNumber);
+		if(o != null){
+			
+			orders.remove(o);
+		}
+	}
+	public Order findOrder(String orderNumber){
+		for(Order o: orders){
+			if(o.getOrderNumber().equals(orderNumber)){
+				return o;
+			}
+		}
+		return null;
+	}
 	
 }

@@ -94,6 +94,22 @@ public class Controller {
 		}
 		return aCust;
 	}
+	public String[] returnCustomerByOrderNumber(String orderNumberFind){
+		Order o;
+		String[] aOrd=null;
+		o=orderRegister.findOrder(orderNumberFind);
+		
+		if(o != null){
+			aOrd= new String[6];
+			aOrd[0]=o.getOrderNumber();
+			aOrd[1]=o.getBelongsTo().getCustomerNumber();
+			aOrd[2]=o.getBelongsTo().getFirstName();
+			aOrd[3]=o.getBelongsTo().getLastName();
+			aOrd[4]=o.getBelongsTo().getPhoneNumber();
+			aOrd[5]=o.getBelongsTo().getDeliveryAddress();
+		}
+		return aOrd;
+	}
 	public void updateCustomer(String cNumber, String newFirstName, String newLastName, String newPhoneNumber, String newDeliveryAddress){
 		customerRegister.setCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
 	}
