@@ -191,7 +191,6 @@ public class CustomerApplication {
 				String tmpCustomerNumber = textField_CustomerNbr.getText();
 				String tmpOrderNumber = textField_OrderNumber.getText();
 					
-			
 				String[] tmpOrder =controller.returnCustomerByOrderNumber(tmpOrderNumber);	
 				String[] tmpCustomer = controller.returnCustomerInfo(tmpCustomerNumber);
 				
@@ -226,9 +225,7 @@ public class CustomerApplication {
 							currentCustomer = controller.findCustomer(tmpOrder[1]);
 							for(Order tmp: currentCustomer.getOrders()){
 								dlm.addElement(tmp.getOrderNumber());
-							}
-							
-							
+							}			
 						}
 					}
 				
