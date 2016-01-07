@@ -79,7 +79,7 @@ public class Controller {
 	public void deleteCustomer(String customerNumberDelete){
 		customerRegister.deleteCustomer(customerNumberDelete);
 	}
-	public String[] returnCustomerInfo(String customerNumberFind){ //B�r inte den h�r funktionen returnera instansen och inte en array?
+	/*public String[] returnCustomerInfo(String customerNumberFind){ //B�r inte den h�r funktionen returnera instansen och inte en array?
 		Customer c;
 		String[] aCust= null;
 		c= customerRegister.findCustomer(customerNumberFind);
@@ -93,8 +93,9 @@ public class Controller {
 			aCust[4]=c.getDeliveryAddress();
 		}
 		return aCust;
-	}
-	public String[] returnCustomerByOrderNumber(String orderNumberFind){
+	}*/
+	
+	/*public String[] returnCustomerByOrderNumber(String orderNumberFind){
 		Order o;
 		String[] aOrd=null;
 		o=orderRegister.findOrder(orderNumberFind);
@@ -109,7 +110,7 @@ public class Controller {
 			aOrd[5]=o.getBelongsTo().getDeliveryAddress();
 		}
 		return aOrd;
-	}
+	}*/
 	public void updateCustomer(String cNumber, String newFirstName, String newLastName, String newPhoneNumber, String newDeliveryAddress){
 		customerRegister.setCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
 	}

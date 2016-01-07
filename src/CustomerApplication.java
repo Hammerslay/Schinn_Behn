@@ -120,8 +120,6 @@ public class CustomerApplication {
 		//panel_Customer.add(list);
 		//list.setModel(dlm);
 		
-		
-		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(6, 6, 609, 487);
 		frmCustomer.getContentPane().add(tabbedPane);
@@ -191,10 +189,31 @@ public class CustomerApplication {
 				String tmpCustomerNumber = textField_CustomerNbr.getText();
 				String tmpOrderNumber = textField_OrderNumber.getText();
 					
-				String[] tmpOrder =controller.returnCustomerByOrderNumber(tmpOrderNumber);	
-				String[] tmpCustomer = controller.returnCustomerInfo(tmpCustomerNumber);
+				//String[] tmpOrder =controller.returnCustomerByOrderNumber(tmpOrderNumber);	
+				//String[] tmpCustomer = controller.returnCustomerInfo(tmpCustomerNumber);
 				
-					if(tmpCustomer != null){
+					if(!tmpCustomerNumber.isEmpty()){
+					
+						Customer tmpCustomer = controller.findCustomer(tmpCustomerNumber);
+						
+						if(tmpCustomer != null){
+							currentCustomer = tmpCustomer;
+							
+							textField_CustomerNbr.setText(currentCustomer.getCustomerNumber());
+							textField_FirstName.setText(currentCustomer.getFirstName());
+							textField_LastName.setText(currentCustomer.getLastName());
+							textField_PhoneNumber.setText(currentCustomer.getPhoneNumber());
+							textField_DeliveryAddress.setText(currentCustomer.getDeliveryAddress());
+							
+							for(Order tmp: currentCustomer.getOrders()){
+								dlm.addElement(tmp.getOrderNumber());
+							}
+						}
+						else{
+							
+						}
+						
+						/*if(tmpCustomer != null){
 						lblResponse.setText("");
 						textField_CustomerNbr.setText(tmpCustomer[0]);
 						textField_FirstName.setText(tmpCustomer[1]);
@@ -211,11 +230,27 @@ public class CustomerApplication {
 						
 					//else if(tmpCustomer.equals(null)){
 					//	lblResponse.setText("Customer not found!");
-					//}
+					//}*/
 					}
-					else if(tmpOrderNumber != null){
+					else if(!tmpOrderNumber.isEmpty()){
 							
-							textField_OrderNumber.setText(tmpOrder[0]);
+						Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
+						
+						if(tmpOrder!=null){
+							currentCustomer = tmpOrder.getBelongsTo();
+							
+							textField_OrderNumber.setText(tmpOrder.getOrderNumber());
+							textField_CustomerNbr.setText(currentCustomer.getCustomerNumber());
+							textField_FirstName.setText(currentCustomer.getFirstName());
+							textField_LastName.setText(currentCustomer.getLastName());
+							textField_PhoneNumber.setText(currentCustomer.getPhoneNumber());
+							textField_DeliveryAddress.setText(currentCustomer.getDeliveryAddress());
+							
+							for(Order tmp: currentCustomer.getOrders()){
+								dlm.addElement(tmp.getOrderNumber());
+							}
+						}
+							/*textField_OrderNumber.setText(tmpOrder[0]);
 							textField_CustomerNbr.setText(tmpOrder[1]);
 							textField_FirstName.setText(tmpOrder[2]);
 							textField_LastName.setText(tmpOrder[3]);
@@ -225,11 +260,9 @@ public class CustomerApplication {
 							currentCustomer = controller.findCustomer(tmpOrder[1]);
 							for(Order tmp: currentCustomer.getOrders()){
 								dlm.addElement(tmp.getOrderNumber());
-							}			
+							}*/			
 						}
 					}
-				
-				
 		});
 		btnFindCustomer.setBounds(16, 375, 150, 29);
 		panel_Customer.add(btnFindCustomer);
@@ -254,8 +287,9 @@ public class CustomerApplication {
 		JButton btnDeleteCustomer = new JButton("Delete Customer");
 		btnDeleteCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String customerNumber =textField_CustomerNbr.getText();
-				String[]tmpCustomer = controller.returnCustomerInfo(customerNumber);
+				String customerNumber = textField_CustomerNbr.getText();
+				Customer tmpCustomer = controller.findCustomer(customerNumber);
+				//String[]tmpCustomer = controller.returnCustomerInfo(customerNumber);
 				if(tmpCustomer != null){
 					controller.deleteCustomer(customerNumber);
 					currentCustomer = null;
@@ -271,7 +305,8 @@ public class CustomerApplication {
 		btnUpdateCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cNumber= textField_CustomerNbr.getText();
-				String[] tmpCustomer= controller.returnCustomerInfo(cNumber);
+				//String[] tmpCustomer= controller.returnCustomerInfo(cNumber);
+				Customer tmpCustomer = controller.findCustomer(cNumber);
 				if(tmpCustomer != null){
 					lblResponse.setText("");
 					String newFirstName = textField_FirstName.getText();

@@ -58,7 +58,6 @@ public class Customer {
 	public void deleteOrder(String orderNumber){
 		Order o = findOrder(orderNumber);
 		if(o != null){
-			
 			orders.remove(o);
 		}
 	}
@@ -71,4 +70,12 @@ public class Customer {
 		return null;
 	}
 	
+	/*public Order findCustomerOrder(String orderNumber){
+		for(Order o: orders){
+			if(o.getOrderNumber().equals(orderNumber)){
+				return o;
+			}
+		}
+		return null;
+	}*/
 }
