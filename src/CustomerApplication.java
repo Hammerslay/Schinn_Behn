@@ -270,6 +270,10 @@ public class CustomerApplication {
 		JButton btnAddCustomer = new JButton("Add Customer");
 		btnAddCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(textField_FirstName.getText().isEmpty()){
+					lblResponse.setText("Add error!");
+					lblResponse.setForeground(Color.red);
+				}else{
 				String customerNumber = controller.generateNewCustomerNumber();//textField_CustomerNbr.getText();
 				textField_CustomerNbr.setText(customerNumber);
 				String firstName= textField_FirstName.getText();
@@ -280,7 +284,7 @@ public class CustomerApplication {
 				lblResponse.setText("Stored Successfully!");
 				currentCustomer = controller.findCustomer(customerNumber);
 			}
-		});
+			}});
 		btnAddCustomer.setBounds(173, 375, 150, 29);
 		panel_Customer.add(btnAddCustomer);
 		
@@ -342,7 +346,7 @@ public class CustomerApplication {
 		
 		lblResponse= new JLabel("");
 		lblResponse.setForeground(Color.BLUE);
-		lblResponse.setBounds(16, 332, 546, 12);
+		lblResponse.setBounds(16, 337, 156, 21);
 		panel_Customer.add(lblResponse);
 		
 		JSeparator separator = new JSeparator(); //Linjen mellan knapparna och rutorna
@@ -354,7 +358,7 @@ public class CustomerApplication {
 		panel_Customer.add(lblOrders);
 		
 		list_1 = new JList();
-		list_1.setBounds(152, 257, 279, 82);
+		list_1.setBounds(152, 257, 279, 76);
 		panel_Customer.add(list_1);
 		DefaultListModel dlm = new DefaultListModel();
 		list_1.setModel(dlm);
@@ -362,6 +366,7 @@ public class CustomerApplication {
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblResponse.setText(null);
 				tabbedPane.setSelectedIndex(1);
 				
 			}
@@ -597,7 +602,7 @@ public class CustomerApplication {
 		
 		lblMsg = new JLabel("");
 		lblMsg.setForeground(Color.RED);
-		lblMsg.setBounds(429, 237, 130, 21);
+		lblMsg.setBounds(377, 237, 182, 21);
 		panel_Order.add(lblMsg);
 		
 		JButton btnDeleteOrder = new JButton("Delete Order");
@@ -629,6 +634,7 @@ public class CustomerApplication {
 		textField_PhoneNumber.setText(null);
 		textField_DeliveryAddress.setText(null);
 		textField_OrderNumber.setText(null);
+		lblMsg.setText(null);
 		dlm.clear();
 		list_1.setModel(dlm);
 	}
