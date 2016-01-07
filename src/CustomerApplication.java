@@ -322,16 +322,6 @@ public class CustomerApplication {
 		btnUpdateCustomer.setBounds(16, 406, 150, 29);
 		panel_Customer.add(btnUpdateCustomer);
 		
-		JButton btnPlaceOrder = new JButton("Place Order");
-		btnPlaceOrder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//panel_Customer.setVisible(false);
-				//panel_Order.setVisible(true);
-			}
-		});
-		btnPlaceOrder.setBounds(434, 375, 138, 29);
-		panel_Customer.add(btnPlaceOrder);
-		
 		JButton btnClearText = new JButton("Clear Text");
 		btnClearText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -339,7 +329,7 @@ public class CustomerApplication {
 				clearText();
 			}
 		});
-		btnClearText.setBounds(434, 406, 138, 29);
+		btnClearText.setBounds(424, 406, 138, 29);
 		panel_Customer.add(btnClearText);
 		
 		/*JButton btnViewOrder = new JButton("View Order");
@@ -368,6 +358,16 @@ public class CustomerApplication {
 		panel_Customer.add(list_1);
 		DefaultListModel dlm = new DefaultListModel();
 		list_1.setModel(dlm);
+		
+		JButton btnPlaceOrder = new JButton("Place Order");
+		btnPlaceOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(1);
+				
+			}
+		});
+		btnPlaceOrder.setBounds(424, 375, 138, 29);
+		panel_Customer.add(btnPlaceOrder);
 		
 		panel_Order = new JPanel();
 		panel_Order.setForeground(Color.BLACK);
@@ -462,7 +462,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnAdd.setBounds(25, 229, 123, 29);
+		btnAdd.setBounds(25, 229, 130, 29);
 		panel_Order.add(btnAdd);
 		
 		JButton btnDelete = new JButton("Delete Product");
@@ -500,7 +500,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdate.setBounds(25, 398, 123, 29);
+		btnUpdate.setBounds(23, 398, 131, 29);
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
@@ -542,7 +542,7 @@ public class CustomerApplication {
 				//panel_Order.setVisible(false);
 			}
 		});
-		btnFindOrder.setBounds(287, 10, 94, 29);
+		btnFindOrder.setBounds(282, 11, 116, 29);
 		panel_Order.add(btnFindOrder);
 		
 		JButton btnAddOrder = new JButton("Place Order");
@@ -592,12 +592,12 @@ public class CustomerApplication {
 				
 			}
 		});
-		btnAddOrder.setBounds(459, 397, 99, 29);
+		btnAddOrder.setBounds(445, 398, 116, 29);
 		panel_Order.add(btnAddOrder);
 		
 		lblMsg = new JLabel("");
 		lblMsg.setForeground(Color.RED);
-		lblMsg.setBounds(366, 237, 193, 21);
+		lblMsg.setBounds(429, 237, 130, 21);
 		panel_Order.add(lblMsg);
 		
 		JButton btnDeleteOrder = new JButton("Delete Order");
@@ -619,7 +619,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnDeleteOrder.setBounds(398, 10, 94, 29);
+		btnDeleteOrder.setBounds(398, 11, 116, 29);
 		panel_Order.add(btnDeleteOrder);
 	}
 	private void clearText(){
