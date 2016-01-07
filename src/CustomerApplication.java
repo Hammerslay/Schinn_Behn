@@ -87,7 +87,7 @@ public class CustomerApplication {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		try {
+		/*try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
 		            UIManager.setLookAndFeel(info.getClassName());
@@ -98,7 +98,7 @@ public class CustomerApplication {
 		   
 			//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			// If Nimbus is not available, you can set the GUI to another look and feel.
-		}
+		}*/
 		
 		frmCustomer = new JFrame();
 		frmCustomer.setTitle("Schinn & Behn AB");
@@ -367,6 +367,7 @@ public class CustomerApplication {
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblResponse.setText(null);
+				lblMsg.setText(null);
 				tabbedPane.setSelectedIndex(1);
 				
 			}
