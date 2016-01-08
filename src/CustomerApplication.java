@@ -111,6 +111,8 @@ public class CustomerApplication {
 		controller = new Controller(customerRegister, productRegister, orderRegister, frmCustomer);
 		frmCustomer.getContentPane().setLayout(null);
 		
+		currentCustomer  = null;
+		
 		//Den h�r ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi b�r nog g�ra en JTable ist�llet?
 		//Man kan ha en scroller i Jlist om man vill kunna scrolla n�r det blir f�r m�nga f�r att se.
 		//list = new JList();
@@ -366,9 +368,15 @@ public class CustomerApplication {
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblResponse.setText(null);
-				lblMsg.setText(null);
-				tabbedPane.setSelectedIndex(1);
+				if(currentCustomer!=null){
+					lblResponse.setText(null);
+					lblMsg.setText(null);
+					tabbedPane.setSelectedIndex(1);
+				}
+				else{
+					lblResponse.setForeground(Color.RED);
+					lblResponse.setText("No customer selected!");
+				}
 			}
 		});
 		btnPlaceOrder.setBounds(424, 375, 138, 29);
