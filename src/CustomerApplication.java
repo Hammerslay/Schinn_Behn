@@ -369,7 +369,6 @@ public class CustomerApplication {
 				lblResponse.setText(null);
 				lblMsg.setText(null);
 				tabbedPane.setSelectedIndex(1);
-				
 			}
 		});
 		btnPlaceOrder.setBounds(424, 375, 138, 29);
