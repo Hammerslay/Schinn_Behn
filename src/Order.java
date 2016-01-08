@@ -69,5 +69,13 @@ public class Order {
            orderLine.setAmount(newAmount);
 		}    
 	}
+	
+	public double getTotalOrderPrice(){
+		double totalPrice = 0;
+		for(OrderLine o: orderLines){
+			totalPrice += o.getProduct().getPrice();
+		}
+		return totalPrice;
+	}
 }
 

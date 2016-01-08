@@ -361,6 +361,7 @@ public class CustomerApplication {
 		panel_Customer.add(lblOrders);
 		
 		list_1 = new JList();
+		list_1.setEnabled(false);
 		list_1.setBounds(152, 257, 279, 76);
 		panel_Customer.add(list_1);
 		DefaultListModel dlm = new DefaultListModel();
