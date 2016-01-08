@@ -195,7 +195,7 @@ public class CustomerApplication {
 				//String[] tmpCustomer = controller.returnCustomerInfo(tmpCustomerNumber);
 				
 					if(!tmpCustomerNumber.isEmpty()){
-					
+						lblResponse.setText("");
 						Customer tmpCustomer = controller.findCustomer(tmpCustomerNumber);
 						
 						if(tmpCustomer != null){
@@ -284,6 +284,7 @@ public class CustomerApplication {
 				String deliveryAddress= textField_DeliveryAddress.getText();
 				controller.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array h�r ist�llet?
 				lblResponse.setText("Stored Successfully!");
+				lblResponse.setForeground(Color.BLUE);
 				currentCustomer = controller.findCustomer(customerNumber);
 			}
 			}});
@@ -364,6 +365,8 @@ public class CustomerApplication {
 		panel_Customer.add(list_1);
 		DefaultListModel dlm = new DefaultListModel();
 		list_1.setModel(dlm);
+		
+		//list_1.getSelectedValue()
 		
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
