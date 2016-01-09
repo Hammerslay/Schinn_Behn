@@ -336,7 +336,7 @@ public class CustomerApplication {
 				clearText();
 			}
 		});
-		btnClearText.setBounds(424, 406, 138, 29);
+		btnClearText.setBounds(460, 296, 89, 37);
 		panel_Customer.add(btnClearText);
 		
 		/*JButton btnViewOrder = new JButton("View Order");
@@ -361,7 +361,7 @@ public class CustomerApplication {
 		panel_Customer.add(lblOrders);
 		
 		list_1 = new JList();
-		list_1.setEnabled(false);
+		list_1.setEnabled(true);;
 		list_1.setBounds(152, 257, 279, 76);
 		panel_Customer.add(list_1);
 		DefaultListModel dlm = new DefaultListModel();
@@ -383,8 +383,48 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnPlaceOrder.setBounds(424, 375, 138, 29);
+		btnPlaceOrder.setBounds(424, 406, 138, 29);
 		panel_Customer.add(btnPlaceOrder);
+		
+		JButton btnViewOrder = new JButton("View Order");
+		btnViewOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				String tmpOrderNumber = (String) list_1.getSelectedValue();
+				Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
+				
+				if(tmpOrder != null){
+					currentOrder = tmpOrder;
+					ArrayList<OrderLine> tmpOrderLines = tmpOrder.getOrderLines();
+					
+					int i = 0;
+						for(OrderLine o: tmpOrderLines){
+								
+							//Object tmpLineNumber = o.getLineNumber();
+							Object tmpProductName = o.getProduct().getName();
+							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
+							Object tmpAmount = o.getAmount();
+							
+							Object[] tmpObjects= new Object[3];
+							
+							model.addRow(tmpObjects);
+							
+							model.setValueAt(tmpProductName, i, 0);
+							model.setValueAt(tmpProductPrice, i, 1);
+							model.setValueAt(tmpAmount, i, 2);
+							
+							i++;
+							
+							tabbedPane.setSelectedIndex(1);
+							lblMsg.setText("");
+						}
+				}
+				 
+				
+			}
+		});
+		btnViewOrder.setBounds(424, 375, 138, 29);
+		panel_Customer.add(btnViewOrder);
 		
 		panel_Order = new JPanel();
 		panel_Order.setForeground(Color.BLACK);
@@ -479,7 +519,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnAdd.setBounds(25, 229, 130, 29);
+		btnAdd.setBounds(25, 229, 131, 29);
 		panel_Order.add(btnAdd);
 		
 		JButton btnDelete = new JButton("Delete Product");
@@ -496,7 +536,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnDelete.setBounds(152, 398, 130, 29);
+		btnDelete.setBounds(156, 398, 130, 29);
 		panel_Order.add(btnDelete);
 		
 		JButton btnUpdate = new JButton("Update Product");
@@ -517,7 +557,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnUpdate.setBounds(23, 398, 131, 29);
+		btnUpdate.setBounds(25, 398, 131, 29);
 		panel_Order.add(btnUpdate);
 		
 		JButton btnFindOrder = new JButton("Find Order");
@@ -555,8 +595,7 @@ public class CustomerApplication {
 					lblMsg.setText("Order not found!");
 				}
 				
-				//panel_Customer.setVisible(true);
-				//panel_Order.setVisible(false);
+				
 			}
 		});
 		btnFindOrder.setBounds(282, 11, 116, 29);
@@ -609,7 +648,7 @@ public class CustomerApplication {
 				
 			}
 		});
-		btnAddOrder.setBounds(445, 398, 116, 29);
+		btnAddOrder.setBounds(455, 398, 110, 29);
 		panel_Order.add(btnAddOrder);
 		
 		lblMsg = new JLabel("");
