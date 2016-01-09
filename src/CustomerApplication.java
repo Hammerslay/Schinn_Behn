@@ -300,6 +300,9 @@ public class CustomerApplication {
 				if(tmpCustomer != null){
 					controller.deleteCustomer(customerNumber);
 					currentCustomer = null;
+					currentCustomer.deleteOrder(currentOrder.getOrderNumber());
+					dlm.removeElement(currentOrder.getOrderNumber());
+					currentOrder = null;
 					lblResponse.setText("Customer Deleted!");
 					clearText();
 				}
@@ -339,13 +342,6 @@ public class CustomerApplication {
 		btnClearText.setBounds(460, 296, 89, 37);
 		panel_Customer.add(btnClearText);
 		
-		/*JButton btnViewOrder = new JButton("View Order");
-		btnViewOrder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
-			}
-		});
-		btnViewOrder.setBounds(434, 334, 138, 29);
-		panel_Customer.add(btnViewOrder);*/
 		
 		lblResponse= new JLabel("");
 		lblResponse.setForeground(Color.BLUE);
@@ -367,7 +363,6 @@ public class CustomerApplication {
 		DefaultListModel dlm = new DefaultListModel();
 		list_1.setModel(dlm);
 		
-		//list_1.getSelectedValue()
 		
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {

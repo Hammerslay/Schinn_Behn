@@ -24,7 +24,7 @@ public class Controller {
 		for(int i = ORDER_LIMIT; i > 1000; i--){
 			orderNumbers.add(Integer.toString(i));
 		}
-		for(int i = CUSTOMER_LIMIT; i > 0; i--){
+		for(int i = 0 ; i < CUSTOMER_LIMIT; i++){
 			customerNumbers.add(Integer.toString(i));
 		}
 		
