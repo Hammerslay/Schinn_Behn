@@ -354,14 +354,18 @@ public class CustomerApplication {
 
 		JLabel lblOrders = new JLabel("Orders:");
 		lblOrders.setBounds(27, 255, 96, 21);
-		panel_Customer.add(lblOrders);
+		panel_Customer.add(lblOrders);;
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(152, 257, 279, 76);
+		panel_Customer.add(scrollPane_1);
 		
 		list_1 = new JList();
-		list_1.setEnabled(true);;
-		list_1.setBounds(152, 257, 279, 76);
-		panel_Customer.add(list_1);
+		scrollPane_1.setViewportView(list_1);
+		list_1.setEnabled(true);
 		DefaultListModel dlm = new DefaultListModel();
 		list_1.setModel(dlm);
+		
 		
 		
 		JButton btnPlaceOrder = new JButton("Place Order");
