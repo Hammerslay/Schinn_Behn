@@ -687,6 +687,7 @@ public class CustomerApplication {
 		lblMsg.setText(null);
 		dlm.clear();
 		list_1.setModel(dlm);
+		clearOrder();
 	}
 	
 	//Gjorde Anna

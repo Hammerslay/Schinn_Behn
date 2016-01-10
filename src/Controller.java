@@ -24,7 +24,7 @@ public class Controller {
 		for(int i = ORDER_LIMIT; i > 1000; i--){
 			orderNumbers.add(Integer.toString(i));
 		}
-		for(int i = 0 ; i < CUSTOMER_LIMIT; i++){
+		for(int i = CUSTOMER_LIMIT ; i > 0; i--){
 			customerNumbers.add(Integer.toString(i));
 		}
 		
@@ -114,10 +114,7 @@ public class Controller {
 	public void updateCustomer(String cNumber, String newFirstName, String newLastName, String newPhoneNumber, String newDeliveryAddress){
 		customerRegister.setCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
 	}
-	public void reset(){
-		
-	}
-	
+
 	//NY METOD H�R
 	public String[] getProductNames(){
 		ArrayList<String> productNames = new ArrayList<String>();
