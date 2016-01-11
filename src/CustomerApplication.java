@@ -363,10 +363,7 @@ public class CustomerApplication {
 		list_1 = new JList();
 		scrollPane_1.setViewportView(list_1);
 		list_1.setEnabled(true);
-		DefaultListModel dlm = new DefaultListModel();
 		list_1.setModel(dlm);
-		
-		
 		
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
