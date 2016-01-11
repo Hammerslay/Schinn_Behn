@@ -344,6 +344,8 @@ public class CustomerApplication {
 				String tmpOrderNumber = (String) list_1.getSelectedValue();
 				Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
 				
+				double totalOrderPrice = 0;
+				
 				if(tmpOrder != null){
 					currentOrder = tmpOrder;
 					ArrayList<OrderLine> tmpOrderLines = tmpOrder.getOrderLines();
@@ -364,11 +366,18 @@ public class CustomerApplication {
 							model.setValueAt(tmpProductPrice, i, 1);
 							model.setValueAt(tmpAmount, i, 2);
 							
+							totalOrderPrice += o.getProduct().getPrice() * o.getAmount();
+							
 							i++;
 							
-							tabbedPane.setSelectedIndex(1);
-							lblMsg.setText("");
 						}
+						
+						tabbedPane.setSelectedIndex(1);
+						lblMsg.setText("");
+						
+						JLabel totalOrderPriceLabel = new JLabel(Double.toString(totalOrderPrice));
+						totalOrderPriceLabel.setBounds(100, 100, 300, 250);
+						panel_Order.add(totalOrderPriceLabel);
 				}
 			}
 		});
