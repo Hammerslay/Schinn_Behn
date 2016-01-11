@@ -113,15 +113,6 @@ public class CustomerApplication {
 		
 		currentCustomer  = null;
 		
-		//Den h�r ska vi lista en kunds ordrar med. Bara tmp-grej nu! Men vi b�r nog g�ra en JTable ist�llet?
-		//Man kan ha en scroller i Jlist om man vill kunna scrolla n�r det blir f�r m�nga f�r att se.
-		//list = new JList();
-		//list.setBounds(152, 246, 279, 84);
-
-		//list.getSelectedIndex();
-		//panel_Customer.add(list);
-		//list.setModel(dlm);
-		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(6, 6, 609, 487);
 		frmCustomer.getContentPane().add(tabbedPane);
@@ -190,9 +181,6 @@ public class CustomerApplication {
 				
 				String tmpCustomerNumber = textField_CustomerNbr.getText();
 				String tmpOrderNumber = textField_OrderNumber.getText();
-					
-				//String[] tmpOrder =controller.returnCustomerByOrderNumber(tmpOrderNumber);	
-				//String[] tmpCustomer = controller.returnCustomerInfo(tmpCustomerNumber);
 				
 					if(!tmpCustomerNumber.isEmpty()){
 						lblResponse.setText("");
@@ -214,25 +202,6 @@ public class CustomerApplication {
 						else{
 							
 						}
-						
-						/*if(tmpCustomer != null){
-						lblResponse.setText("");
-						textField_CustomerNbr.setText(tmpCustomer[0]);
-						textField_FirstName.setText(tmpCustomer[1]);
-						textField_LastName.setText(tmpCustomer[2]);
-						textField_PhoneNumber.setText(tmpCustomer[3]);
-						textField_DeliveryAddress.setText(tmpCustomer[4]);
-						
-						currentCustomer = controller.findCustomer(tmpCustomerNumber);
-						
-						for(Order tmp: currentCustomer.getOrders()){
-							dlm.addElement(tmp.getOrderNumber());
-							//lblMsg.setText(tmp.getOrderNumber());
-						}
-						
-					//else if(tmpCustomer.equals(null)){
-					//	lblResponse.setText("Customer not found!");
-					//}*/
 					}
 					else if(!tmpOrderNumber.isEmpty()){
 							
@@ -251,20 +220,9 @@ public class CustomerApplication {
 							for(Order tmp: currentCustomer.getOrders()){
 								dlm.addElement(tmp.getOrderNumber());
 							}
-						}
-							/*textField_OrderNumber.setText(tmpOrder[0]);
-							textField_CustomerNbr.setText(tmpOrder[1]);
-							textField_FirstName.setText(tmpOrder[2]);
-							textField_LastName.setText(tmpOrder[3]);
-							textField_PhoneNumber.setText(tmpOrder[4]);
-							textField_DeliveryAddress.setText(tmpOrder[5]);
-							
-							currentCustomer = controller.findCustomer(tmpOrder[1]);
-							for(Order tmp: currentCustomer.getOrders()){
-								dlm.addElement(tmp.getOrderNumber());
-							}*/			
-						}
+						}		
 					}
+				}
 		});
 		btnFindCustomer.setBounds(16, 375, 150, 29);
 		panel_Customer.add(btnFindCustomer);
@@ -296,7 +254,6 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 				String customerNumber = textField_CustomerNbr.getText();
 				Customer tmpCustomer = controller.findCustomer(customerNumber);
-				//String[]tmpCustomer = controller.returnCustomerInfo(customerNumber);
 				if(tmpCustomer != null){
 					controller.deleteCustomer(customerNumber);
 					currentCustomer = null;
@@ -315,7 +272,6 @@ public class CustomerApplication {
 		btnUpdateCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cNumber= textField_CustomerNbr.getText();
-				//String[] tmpCustomer= controller.returnCustomerInfo(cNumber);
 				Customer tmpCustomer = controller.findCustomer(cNumber);
 				if(tmpCustomer != null){
 					lblResponse.setText("");
@@ -341,7 +297,6 @@ public class CustomerApplication {
 		});
 		btnClearText.setBounds(460, 296, 89, 37);
 		panel_Customer.add(btnClearText);
-		
 		
 		lblResponse= new JLabel("");
 		lblResponse.setForeground(Color.BLUE);
@@ -415,8 +370,6 @@ public class CustomerApplication {
 							lblMsg.setText("");
 						}
 				}
-				 
-				
 			}
 		});
 		btnViewOrder.setBounds(424, 375, 138, 29);
@@ -570,7 +523,6 @@ public class CustomerApplication {
 					int i = 0;
 						for(OrderLine o: tmpOrderLines){
 								
-							//Object tmpLineNumber = o.getLineNumber();
 							Object tmpProductName = o.getProduct().getName();
 							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
 							Object tmpAmount = o.getAmount();
@@ -590,8 +542,6 @@ public class CustomerApplication {
 					lblMsg.setForeground(Color.RED);
 					lblMsg.setText("Order not found!");
 				}
-				
-				
 			}
 		});
 		btnFindOrder.setBounds(282, 11, 116, 29);
@@ -627,11 +577,7 @@ public class CustomerApplication {
 					controller.getOrderRegister().addOrder(tmpOrder); //L�gger till ordern i det STORA orderregistret som h�ller ALLAS ordrar.
 					currentCustomer.addOrder(tmpOrder); //L�gger till ordern hos den specifika kundens orderregister s� att det g�r att hitta ordern genom kunden.
 					
-					//ArrayList<Order> tmpOrders = currentCustomer.getOrders();
-					//Order tmpOrderIgen = tmpOrders.get(0);
-					
 					dlm.addElement(tmpOrder.getOrderNumber());
-					//textField_OrderNumber.setText(tmpOrderIgen.getOrderNumber());
 					
 					lblMsg.setForeground(Color.BLUE);
 					lblMsg.setText("Order placed!");
@@ -641,7 +587,6 @@ public class CustomerApplication {
 					lblMsg.setForeground(Color.RED);
 					lblMsg.setText("No selected customer!");
 				}
-				
 			}
 		});
 		btnAddOrder.setBounds(455, 398, 110, 29);
@@ -700,4 +645,3 @@ public class CustomerApplication {
 		}
 	}
 }
-

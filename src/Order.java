@@ -33,7 +33,6 @@ public class Order {
 	public void addOrderLine(OrderLine newOrderLine){
 		this.orderLines.add(newOrderLine);
 	}
-	
 	public void deleteOrderLine(String lineNumber){
 		OrderLine ol=this.findOrderLine(lineNumber);
 		if(ol != null){
@@ -51,25 +50,20 @@ public class Order {
 	public Order(String orderNumber){
 		this.setOrderNumber(orderNumber);
 		//this.setOrderDate(orderDate);
-		
 	}
-	
-	/*public void changeOrderLine(String lineNumber, int newAmount) { 
+	public void changeOrderLine(String lineNumber, int newAmount) { 
 		
 		OrderLine o = this.findOrderLine(lineNumber);
 		if (o != null) {
-			
            o.setAmount(newAmount);
-    
 		}    
-	}*/
+	}
 	public void changeOrder(String lineNumber, int newAmount) { 
 		OrderLine orderLine = this.findOrderLine(lineNumber);
 		if (orderLine != null) {
            orderLine.setAmount(newAmount);
 		}    
 	}
-	
 	public double getTotalOrderPrice(){
 		double totalPrice = 0;
 		for(OrderLine o: orderLines){
@@ -78,4 +72,3 @@ public class Order {
 		return totalPrice;
 	}
 }
-

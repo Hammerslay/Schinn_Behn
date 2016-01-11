@@ -8,11 +8,9 @@ public class ProductRegister {
 	public ArrayList<Product> getProducts() {
 		return products;
 	}
-
 	public void setProducts(ArrayList<Product> produkter) {
 		this.products = produkter;
 	}
-
 	public void add(Product newProduct){
 		products.add(newProduct);
 	}
@@ -30,7 +28,6 @@ public class ProductRegister {
 		}
 		return null;
 	}
-
 	public void setProductName(String productName, String newName) { 
 		Product p = this.find(productName);
 		if (p != null) {

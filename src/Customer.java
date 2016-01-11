@@ -69,13 +69,4 @@ public class Customer {
 		}
 		return null;
 	}
-	
-	/*public Order findCustomerOrder(String orderNumber){
-		for(Order o: orders){
-			if(o.getOrderNumber().equals(orderNumber)){
-				return o;
-			}
-		}
-		return null;
-	}*/
 }

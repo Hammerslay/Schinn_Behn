@@ -70,7 +70,6 @@ public class Controller {
 		this.orderRegister = orderRegister;
 	}
 
-	//Kanske skicka in en string-array h�r ist�llet?
 	public void addCustomer(String customerNumber, String firstName, String lastName, String phoneNumber, String deliveryAddress){
 		Customer tmpCustomer = new Customer(customerNumber,firstName,lastName,phoneNumber,deliveryAddress);
 		customerRegister.addCustomer(tmpCustomer);
@@ -79,43 +78,11 @@ public class Controller {
 	public void deleteCustomer(String customerNumberDelete){
 		customerRegister.deleteCustomer(customerNumberDelete);
 	}
-	/*public String[] returnCustomerInfo(String customerNumberFind){ //B�r inte den h�r funktionen returnera instansen och inte en array?
-		Customer c;
-		String[] aCust= null;
-		c= customerRegister.findCustomer(customerNumberFind);
-		
-		if(c != null){
-			aCust= new String[5];
-			aCust[0]= c.getCustomerNumber();
-			aCust[1]= c.getFirstName();
-			aCust[2]=c.getLastName();
-			aCust[3]=c.getPhoneNumber();
-			aCust[4]=c.getDeliveryAddress();
-		}
-		return aCust;
-	}*/
-	
-	/*public String[] returnCustomerByOrderNumber(String orderNumberFind){
-		Order o;
-		String[] aOrd=null;
-		o=orderRegister.findOrder(orderNumberFind);
-		
-		if(o != null){
-			aOrd= new String[6];
-			aOrd[0]=o.getOrderNumber();
-			aOrd[1]=o.getBelongsTo().getCustomerNumber();
-			aOrd[2]=o.getBelongsTo().getFirstName();
-			aOrd[3]=o.getBelongsTo().getLastName();
-			aOrd[4]=o.getBelongsTo().getPhoneNumber();
-			aOrd[5]=o.getBelongsTo().getDeliveryAddress();
-		}
-		return aOrd;
-	}*/
+
 	public void updateCustomer(String cNumber, String newFirstName, String newLastName, String newPhoneNumber, String newDeliveryAddress){
 		customerRegister.setCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
 	}
 
-	//NY METOD H�R
 	public String[] getProductNames(){
 		ArrayList<String> productNames = new ArrayList<String>();
 		for(Product p: this.getProductRegister().getProducts()){
@@ -128,7 +95,6 @@ public class Controller {
 		return listOfProducts;
 	}
 	
-	//NY METOD H�R
 	public ArrayList<Double> getProductPrices(){
 		ArrayList<Double> productPrices = new ArrayList<Double>();
 		for(Product p: this.getProductRegister().getProducts()){

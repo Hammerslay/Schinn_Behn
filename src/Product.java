@@ -23,7 +23,6 @@ public class Product {
 		//this.setProductNumber(productNumber);
 		this.setName(name);
 		this.setPrice(price);
-		
 	}
 	public ArrayList<OrderLine> getOrderLines() {
 		return orderLines;

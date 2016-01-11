@@ -33,5 +33,4 @@ public class OrderLine {
 		this.setProduct(product);
 		this.setAmount(amount);
 	}
-	
 }

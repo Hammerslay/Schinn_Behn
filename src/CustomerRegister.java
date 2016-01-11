@@ -7,15 +7,12 @@ public class CustomerRegister {
 		this.addCustomer(new Customer("11", "Anna", "Andersson", "1111111111", "Storgatan 1"));
 		this.addCustomer(new Customer("22", "Sven", "Svensson", "2222222222", "Storgatan 2"));
 	}
-	
 	public ArrayList<Customer> getCustomers() {
 		return customers;
 	}
-
 	public void setCustomers(ArrayList<Customer> customers) {
 		this.customers = customers;
 	}
-
 	public void addCustomer(Customer newCustomer){
 		customers.add(newCustomer);
 	}
@@ -24,7 +21,6 @@ public class CustomerRegister {
 		if(c != null){
 			customers.remove(c);
 		}
-		
 	}
 	public Customer findCustomer(String customerNumber){
 		for(Customer c: customers){
@@ -41,14 +37,12 @@ public class CustomerRegister {
 	           c.setLastName(newLastName);
 	           c.setPhoneNumber(newPhoneNumber);
 	           c.setDeliveryAddress(newDeliveryAddress);
-	    
-	         }
+	    }
 	}
 	public void changeCustomerDAddress(String customerNumber, String newDAddress) { 
 		Customer c = this.findCustomer(customerNumber);
 		if (c != null) {
 	           c.setDeliveryAddress(newDAddress);
-	    
-	         }
+	    }
 	}
 }
