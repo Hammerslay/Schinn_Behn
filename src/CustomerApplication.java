@@ -37,11 +37,12 @@ public class CustomerApplication {
 	private JTextField textField_PhoneNumber;
 	private JTextField textField_DeliveryAddress;
 	private JTextField textField_OrderNumber;
+	private JTextField textField_TotalPrice;
 	private JPanel panel_Order;
 	private JPanel panel_Customer;
 	private JComboBox comboBox_Product;
 	private JLabel lblMsg;
-	private JList list_1;
+	private JList list_Order;
 	
 	private Controller controller;
 	private CustomerRegister customerRegister;
@@ -51,10 +52,13 @@ public class CustomerApplication {
 	private Customer currentCustomer;
 	private Order currentOrder;
 	
-	private JTextField textField_Amount;
+	private JTextField textField_Quantity;
 	private JTextField textField_OrderNumberorder;
 	private JTextField textField_Price;
 	private JTable table;
+	
+	private DefaultListModel dlm = new DefaultListModel();
+	private DefaultTableModel model=new DefaultTableModel();
 
 	/**
 	 * Launch the application.
@@ -79,8 +83,7 @@ public class CustomerApplication {
 		initialize();
 	}
 	
-	DefaultListModel dlm = new DefaultListModel();
-	DefaultTableModel model=new DefaultTableModel();
+	
 
 	
 	/**
@@ -257,9 +260,9 @@ public class CustomerApplication {
 				if(tmpCustomer != null){
 					controller.deleteCustomer(customerNumber);
 					currentCustomer = null;
-					currentCustomer.deleteOrder(currentOrder.getOrderNumber());
-					dlm.removeElement(currentOrder.getOrderNumber());
-					currentOrder = null;
+					//currentCustomer.deleteOrder(currentOrder.getOrderNumber());
+					//dlm.removeElement(currentOrder.getOrderNumber());
+					//currentOrder = null;
 					lblResponse.setText("Customer Deleted!");
 					clearText();
 				}
@@ -315,10 +318,10 @@ public class CustomerApplication {
 		scrollPane_1.setBounds(152, 257, 279, 76);
 		panel_Customer.add(scrollPane_1);
 		
-		list_1 = new JList();
-		scrollPane_1.setViewportView(list_1);
-		list_1.setEnabled(true);
-		list_1.setModel(dlm);
+		list_Order = new JList();
+		scrollPane_1.setViewportView(list_Order);
+		list_Order.setEnabled(true);
+		list_Order.setModel(dlm);
 		
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
@@ -341,7 +344,7 @@ public class CustomerApplication {
 		btnViewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				String tmpOrderNumber = (String) list_1.getSelectedValue();
+				String tmpOrderNumber = (String) list_Order.getSelectedValue();
 				Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
 				
 				double totalOrderPrice = 0;
@@ -353,10 +356,9 @@ public class CustomerApplication {
 					int i = 0;
 						for(OrderLine o: tmpOrderLines){
 								
-							//Object tmpLineNumber = o.getLineNumber();
 							Object tmpProductName = o.getProduct().getName();
 							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
-							Object tmpAmount = o.getAmount();
+							Object tmpQuantity = o.getAmount();
 							
 							Object[] tmpObjects= new Object[3];
 							
@@ -364,20 +366,19 @@ public class CustomerApplication {
 							
 							model.setValueAt(tmpProductName, i, 0);
 							model.setValueAt(tmpProductPrice, i, 1);
-							model.setValueAt(tmpAmount, i, 2);
+							model.setValueAt(tmpQuantity, i, 2);
 							
 							totalOrderPrice += o.getProduct().getPrice() * o.getAmount();
-							
 							i++;
 							
 						}
 						
+						textField_TotalPrice.setText(Double.toString(totalOrderPrice)+ " kr");
 						tabbedPane.setSelectedIndex(1);
 						lblMsg.setText("");
 						
-						JLabel totalOrderPriceLabel = new JLabel(Double.toString(totalOrderPrice));
-						totalOrderPriceLabel.setBounds(100, 100, 300, 250);
-						panel_Order.add(totalOrderPriceLabel);
+						
+						
 				}
 			}
 		});
@@ -404,10 +405,10 @@ public class CustomerApplication {
 		comboBox_Product.setBounds(128, 78, 154, 27);
 		panel_Order.add(comboBox_Product);
 		
-		textField_Amount = new JTextField();
-		textField_Amount.setBounds(129, 156, 130, 29);
-		panel_Order.add(textField_Amount);
-		textField_Amount.setColumns(10);
+		textField_Quantity = new JTextField();
+		textField_Quantity.setBounds(129, 156, 130, 29);
+		panel_Order.add(textField_Quantity);
+		textField_Quantity.setColumns(10);
 		
 		JLabel lblOrderNumber_order = new JLabel("Order number:");
 		lblOrderNumber_order.setBounds(25, 14, 110, 21);
@@ -435,6 +436,7 @@ public class CustomerApplication {
 		panel_Order.add(separator_1);
 		
 		textField_Price = new JTextField();
+		textField_Price.setEnabled(false);
 		textField_Price.setBounds(128, 115, 131, 29);
 		panel_Order.add(textField_Price);
 		textField_Price.setColumns(10);
@@ -456,28 +458,29 @@ public class CustomerApplication {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(textField_Amount.getText().equals("") && textField_Price.getText().equals("")){
-					lblMsg.setText("Select Product and Amount!");
+				if(textField_Quantity.getText().equals("") && textField_Price.getText().equals("")){
+					lblMsg.setText("Select Product and Quantity!");
 				}
-				else if(textField_Amount.getText().equals("")){
-					lblMsg.setText("Select Amount!");
+				else if(textField_Quantity.getText().equals("")){
+					lblMsg.setText("Select Quantity!");
 				}
-				else if(textField_Amount.getText().equals("")){
+				else if(textField_Quantity.getText().equals("")){
 					lblMsg.setText("Select Product!");
 				}
 				else{
-					lblMsg.setText(""); //Stoppa ner dessa fem rader kod i den sista if-satsen?
+					lblMsg.setText(""); 
 					row[0]= comboBox_Product.getSelectedItem();
 					row[1]= textField_Price.getText();
-					row[2]= textField_Amount.getText();
+					row[2]= textField_Quantity.getText();
 					model.addRow(row);
 					
 					lblMsg.setText(null);
-					textField_Amount.setText("");
+					textField_Quantity.setText("");
+					
 				}
 			}
 		});
-		btnAdd.setBounds(25, 229, 131, 29);
+		btnAdd.setBounds(25, 229, 110, 29);
 		panel_Order.add(btnAdd);
 		
 		JButton btnDelete = new JButton("Delete Product");
@@ -494,7 +497,7 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnDelete.setBounds(156, 398, 130, 29);
+		btnDelete.setBounds(152, 398, 130, 29);
 		panel_Order.add(btnDelete);
 		
 		JButton btnUpdate = new JButton("Update Product");
@@ -508,7 +511,7 @@ public class CustomerApplication {
 					lblMsg.setText("");
 					model.setValueAt(comboBox_Product.getSelectedItem(), i, 0);
 					model.setValueAt(textField_Price.getText(), i, 1);
-					model.setValueAt(textField_Amount.getText(), i, 2);
+					model.setValueAt(textField_Quantity.getText(), i, 2);
 				}
 				else{
 					lblMsg.setText("Update Error!");
@@ -564,21 +567,21 @@ public class CustomerApplication {
 					Order tmpOrder = new Order(controller.generateNewOrderNumber());
 					tmpOrder.setBelongsTo(currentCustomer);
 					
-					TableModel tmpModel = table.getModel();
-					int rows = tmpModel.getRowCount();
+					int rows = model.getRowCount();
+					
 					
 					for(int i = 0; i < rows; i++){
 						Object[] objects = new Object[3];
-						objects[0] = tmpModel.getValueAt(i, 0);
-						objects[1] = tmpModel.getValueAt(i, 1);
-						objects[2] = tmpModel.getValueAt(i, 2);
+						objects[0] = model.getValueAt(i, 0);
+						objects[1] = model.getValueAt(i, 1);
+						objects[2] = model.getValueAt(i, 2);
 						
 						String tmpProductName = (String)objects[0];
 						String tmpPrice = (String)objects[1];
 						String tmpQuantity = (String)objects[2];
 						
 						Product tmpProduct = controller.getProductRegister().find(tmpProductName);
-						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));
+						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));//Chaima undrar?
 						tmpOrder.addOrderLine(tmpOrderLine);
 					
 					}
@@ -598,12 +601,12 @@ public class CustomerApplication {
 				}
 			}
 		});
-		btnAddOrder.setBounds(455, 398, 110, 29);
+		btnAddOrder.setBounds(449, 229, 110, 29);
 		panel_Order.add(btnAddOrder);
 		
 		lblMsg = new JLabel("");
 		lblMsg.setForeground(Color.RED);
-		lblMsg.setBounds(377, 237, 182, 21);
+		lblMsg.setBounds(261, 229, 182, 21);
 		panel_Order.add(lblMsg);
 		
 		JButton btnDeleteOrder = new JButton("Delete Order");
@@ -627,6 +630,16 @@ public class CustomerApplication {
 		});
 		btnDeleteOrder.setBounds(398, 11, 116, 29);
 		panel_Order.add(btnDeleteOrder);
+		
+		textField_TotalPrice = new JTextField();
+		textField_TotalPrice.setEnabled(false);
+		textField_TotalPrice.setBounds(430, 398, 130, 26);
+		panel_Order.add(textField_TotalPrice);
+		textField_TotalPrice.setColumns(10);
+		
+		JLabel lblTotalPrice = new JLabel("Total price:");
+		lblTotalPrice.setBounds(335, 403, 83, 16);
+		panel_Order.add(lblTotalPrice);
 	}
 	private void clearText(){
 		textField_CustomerNbr.setText(null);
@@ -637,7 +650,7 @@ public class CustomerApplication {
 		textField_OrderNumber.setText(null);
 		lblMsg.setText(null);
 		dlm.clear();
-		list_1.setModel(dlm);
+		list_Order.setModel(dlm);
 		clearOrder();
 	}
 	
@@ -645,8 +658,9 @@ public class CustomerApplication {
 	private void clearOrder() {
 		comboBox_Product.setSelectedIndex(3);
 		textField_Price.setText(null);
-		textField_Amount.setText(null);
+		textField_Quantity.setText(null);
 		textField_OrderNumberorder.setText(null);
+		textField_TotalPrice.setText(null);
 		int tmp = model.getRowCount();
 		
 		for (int i = 0; i < tmp; i++) {

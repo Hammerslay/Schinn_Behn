@@ -28,9 +28,9 @@ public class Controller {
 			customerNumbers.add(Integer.toString(i));
 		}
 		
-		productRegister.add(new Product("Prinskorv 250g", 234));
-		productRegister.add(new Product("Offerlamm 500g", 546));
-		productRegister.add(new Product("Leverkorv 350g", 300));
+		productRegister.add(new Product("Prinskorv 250g", 234.90));
+		productRegister.add(new Product("Offerlamm 500g", 546.80));
+		productRegister.add(new Product("Leverkorv 350g", 160.50));
 		productRegister.add(new Product("", 0));
 	}
 	
