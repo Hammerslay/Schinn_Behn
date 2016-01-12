@@ -303,7 +303,7 @@ public class Application {
 		lblResponse.setBounds(16, 337, 156, 21);
 		panel_Customer.add(lblResponse);
 		
-		JSeparator separator = new JSeparator(); //Linjen mellan knapparna och rutorna
+		JSeparator separator = new JSeparator();
 		separator.setBounds(16, 359, 546, 12);
 		panel_Customer.add(separator);
 
@@ -444,7 +444,7 @@ public class Application {
 		scrollPane.setBounds(25, 270, 534, 116);
 		panel_Order.add(scrollPane);
 		
-		table = new JTable(); //Listan med produkter man lagt till i varukorgen
+		table = new JTable(); 
 		scrollPane.setViewportView(table);
 		Object[]columns={"Product","Price/unit","Quantity"};
 
@@ -585,8 +585,8 @@ public class Application {
 					
 					}
 					
-					controllerOrder.getOrderRegister().addOrder(tmpOrder); //L�gger till ordern i det STORA orderregistret som h�ller ALLAS ordrar.
-					currentCustomer.addOrder(tmpOrder); //L�gger till ordern hos den specifika kundens orderregister s� att det g�r att hitta ordern genom kunden.
+					controllerOrder.getOrderRegister().addOrder(tmpOrder); 
+					currentCustomer.addOrder(tmpOrder);
 					
 					dlm.addElement(tmpOrder.getOrderNumber());
 					
@@ -652,8 +652,6 @@ public class Application {
 		list_Order.setModel(dlm);
 		clearOrder();
 	}
-	
-	//Gjorde Anna
 	private void clearOrder() {
 		comboBox_Product.setSelectedIndex(3);
 		textField_Price.setText(null);
