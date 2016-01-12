@@ -25,15 +25,14 @@ public class Test {
 		
 		OrderLine orderLine2= new OrderLine("Orderrad 2.",product3, 4);
 		OrderLine orderLine1 = new OrderLine("Orderrad 1", product4, 2);
-		Order order1 = new Order("order nr.1");
-		Order order2 = new Order("order nr.2");
-		Order order3 = new Order("order nr.3");
+		Order order1 = new Order("order nr.1", customer1);
+		Order order2 = new Order("order nr.2", customer1);
+		Order order3 = new Order("order nr.3",customer2);
 		
 		order1.addOrderLine(orderLine1);
-		order1.setBelongsTo(customer1);
 		order1.addOrderLine(orderLine2);
-		order2.setBelongsTo(customer1);
-		order3.setBelongsTo(customer1);
+		
+	
 		
 		OrderRegister orderRegister= new OrderRegister();
 		

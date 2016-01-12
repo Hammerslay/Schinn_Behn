@@ -5,8 +5,8 @@ public class Customer {
 	private String customerNumber;
 	private String firstName;
 	private String lastName;
-	private String deliveryAddress;
 	private String phoneNumber;
+	private String deliveryAddress;
 	private ArrayList<Order> orders = new ArrayList<Order>();
 	
 	public String getCustomerNumber() {
@@ -30,6 +30,12 @@ public class Customer {
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
@@ -42,12 +48,7 @@ public class Customer {
 	public void addOrder(Order newOrder){
 		this.orders.add(newOrder);
 	}
-	public String getDeliveryAddress() {
-		return deliveryAddress;
-	}
-	public void setDeliveryAddress(String deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
+	
 	public Customer(String customerNumber, String firstname, String lastname, String deliveryAddress,String phoneNumber){
 		   this.setCustomerNumber(customerNumber);
 		   this.setFirstName(firstname);

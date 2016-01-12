@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 
 public class Controller {
 	CustomerRegister customerRegister;
-	ProductRegister productRegister; //Jakob la till
-	OrderRegister orderRegister; //Jakob la till;
+	ProductRegister productRegister;
+	OrderRegister orderRegister; 
 	
 	private ArrayList<String> orderNumbers = new ArrayList<String>();
 	private ArrayList<String> customerNumbers = new ArrayList<String>();
@@ -32,6 +32,16 @@ public class Controller {
 		productRegister.add(new Product("Offerlamm 500g", 546.80));
 		productRegister.add(new Product("Leverkorv 350g", 160.50));
 		productRegister.add(new Product("", 0));
+	}
+	public double totalOrderPrice(String orderNumber){
+		Order tmpOrder = findOrder(orderNumber);
+		if(tmpOrder != null){
+			return tmpOrder.getTotalOrderPrice();
+		}
+		return 0;
+	}
+	public Order findOrder(String orderNumber){
+		return this.orderRegister.findOrder(orderNumber);
 	}
 	
 	public String generateNewOrderNumber(){

@@ -24,6 +24,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.event.ItemListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.awt.event.ItemEvent;
 
@@ -59,6 +60,7 @@ public class CustomerApplication {
 	
 	private DefaultListModel dlm = new DefaultListModel();
 	private DefaultTableModel model=new DefaultTableModel();
+	private DecimalFormat round = new DecimalFormat ("#.00 kr");
 
 	/**
 	 * Launch the application.
@@ -358,7 +360,7 @@ public class CustomerApplication {
 								
 							Object tmpProductName = o.getProduct().getName();
 							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
-							Object tmpQuantity = o.getAmount();
+							Object tmpQuantity = o.getQuantity();
 							
 							Object[] tmpObjects= new Object[3];
 							
@@ -367,13 +369,14 @@ public class CustomerApplication {
 							model.setValueAt(tmpProductName, i, 0);
 							model.setValueAt(tmpProductPrice, i, 1);
 							model.setValueAt(tmpQuantity, i, 2);
-							
-							totalOrderPrice += o.getProduct().getPrice() * o.getAmount();
+						
+						
 							i++;
 							
 						}
-						
-						textField_TotalPrice.setText(Double.toString(totalOrderPrice)+ " kr");
+						totalOrderPrice += controller.totalOrderPrice(tmpOrderNumber);
+						String tmpTotalOrderPrice = round.format(totalOrderPrice);
+						textField_TotalPrice.setText(tmpTotalOrderPrice);
 						tabbedPane.setSelectedIndex(1);
 						lblMsg.setText("");
 						
@@ -398,7 +401,8 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 				
 				int x = comboBox_Product.getSelectedIndex(); 
-				textField_Price.setText(Double.toString(controller.getProductPrices().get(x)));
+				String tmpUnitPrice = round.format(controller.getProductPrices().get(x));
+				textField_Price.setText(tmpUnitPrice);
 			}
 		});
 	
@@ -418,8 +422,8 @@ public class CustomerApplication {
 		lblProduct.setBounds(30, 77, 83, 27);
 		panel_Order.add(lblProduct);
 		
-		JLabel lblPrice = new JLabel("Price:");
-		lblPrice.setBounds(30, 116, 83, 32);
+		JLabel lblPrice = new JLabel("Price /unit:");
+		lblPrice.setBounds(30, 116, 105, 32);
 		panel_Order.add(lblPrice);
 		
 		textField_OrderNumberorder = new JTextField();
@@ -427,9 +431,9 @@ public class CustomerApplication {
 		panel_Order.add(textField_OrderNumberorder);
 		textField_OrderNumberorder.setColumns(10);
 		
-		JLabel lblAmount = new JLabel("Quantity:");
-		lblAmount.setBounds(30, 160, 83, 21);
-		panel_Order.add(lblAmount);
+		JLabel lblQuantity = new JLabel("Quantity:");
+		lblQuantity.setBounds(30, 160, 83, 21);
+		panel_Order.add(lblQuantity);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(18, 43, 553, 12);
@@ -447,7 +451,7 @@ public class CustomerApplication {
 		
 		table = new JTable(); //Listan med produkter man lagt till i varukorgen
 		scrollPane.setViewportView(table);
-		Object[]columns={"Product","Price","Quantity"};
+		Object[]columns={"Product","Price/unit","Quantity"};
 
 		model.setColumnIdentifiers(columns);
 		table.setModel(model);
@@ -537,7 +541,7 @@ public class CustomerApplication {
 								
 							Object tmpProductName = o.getProduct().getName();
 							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
-							Object tmpAmount = o.getAmount();
+							Object tmpAmount = o.getQuantity();
 							
 							Object[] tmpObjects= new Object[3];
 							
@@ -564,7 +568,7 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(currentCustomer != null){
-					Order tmpOrder = new Order(controller.generateNewOrderNumber());
+					Order tmpOrder = new Order(controller.generateNewOrderNumber(),currentCustomer);
 					tmpOrder.setBelongsTo(currentCustomer);
 					
 					int rows = model.getRowCount();

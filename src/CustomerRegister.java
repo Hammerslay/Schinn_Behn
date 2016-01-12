@@ -3,10 +3,6 @@ import java.util.ArrayList;
 public class CustomerRegister {
 	private ArrayList<Customer> customers= new ArrayList<Customer>();
 
-	public CustomerRegister(){
-		this.addCustomer(new Customer("11", "Anna", "Andersson", "1111111111", "Storgatan 1"));
-		this.addCustomer(new Customer("22", "Sven", "Svensson", "2222222222", "Storgatan 2"));
-	}
 	public ArrayList<Customer> getCustomers() {
 		return customers;
 	}
@@ -16,12 +12,18 @@ public class CustomerRegister {
 	public void addCustomer(Customer newCustomer){
 		customers.add(newCustomer);
 	}
+	public CustomerRegister(){
+		this.addCustomer(new Customer("11", "Anna", "Andersson", "04023489", "Storgatan 1"));
+		this.addCustomer(new Customer("22", "Sven", "Svensson", "0724567131", "Västergatan 18"));
+	}
+	
 	public void deleteCustomer(String customerNumber){
 		Customer c = findCustomer(customerNumber);
 		if(c != null){
 			customers.remove(c);
 		}
 	}
+	
 	public Customer findCustomer(String customerNumber){
 		for(Customer c: customers){
 			if(c.getCustomerNumber().equals(customerNumber)){

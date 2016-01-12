@@ -1,10 +1,11 @@
+
 import java.util.ArrayList;
 
 public class Order {
 	private String orderNumber;
-	//private String orderDate;
 	private Customer belongsTo;
 	private ArrayList<OrderLine> orderLines= new ArrayList<OrderLine>();
+
 	
 	public String getOrderNumber() {
 		return orderNumber;
@@ -12,12 +13,6 @@ public class Order {
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-	/*public String getOrderDate() {
-		return orderDate;
-	}
-	public void setOrderDate(String orderDate) {
-		this.orderDate = orderDate;
-	}*/
 	public Customer getBelongsTo() {
 		return belongsTo;
 	}
@@ -47,27 +42,21 @@ public class Order {
 		}
 		return null;
 	}
-	public Order(String orderNumber){
+	public Order(String orderNumber, Customer belongsTo){
 		this.setOrderNumber(orderNumber);
-		//this.setOrderDate(orderDate);
+		this.setBelongsTo(belongsTo);
 	}
-	public void changeOrderLine(String lineNumber, int newAmount) { 
-		
+	public void changeOrderLine(String lineNumber, int newQuantity) { 
 		OrderLine o = this.findOrderLine(lineNumber);
 		if (o != null) {
-           o.setAmount(newAmount);
+           o.setQuantity(newQuantity);
 		}    
 	}
-	public void changeOrder(String lineNumber, int newAmount) { 
-		OrderLine orderLine = this.findOrderLine(lineNumber);
-		if (orderLine != null) {
-           orderLine.setAmount(newAmount);
-		}    
-	}
+	
 	public double getTotalOrderPrice(){
 		double totalPrice = 0;
 		for(OrderLine o: orderLines){
-			totalPrice += o.getProduct().getPrice();
+			totalPrice += o.getProduct().getPrice() * o.getQuantity();
 		}
 		return totalPrice;
 	}
