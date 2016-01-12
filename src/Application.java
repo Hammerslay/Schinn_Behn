@@ -528,7 +528,6 @@ public class Application {
 				
 				if(currentCustomer != null){
 					Order tmpOrder = new Order(controllerOrder.generateNewOrderNumber(),currentCustomer);
-					tmpOrder.setBelongsTo(currentCustomer);
 					
 					int rows = model.getRowCount();
 					
