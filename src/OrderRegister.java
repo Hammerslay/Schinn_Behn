@@ -5,10 +5,6 @@ import java.util.ArrayList;
 	
 	private ArrayList<Order> orders= new ArrayList<Order>();
 
-	public void releaseOrderNumber(){
-		
-	}
-
 	public ArrayList<Order> getOrders() {
 		return orders;
 	}
