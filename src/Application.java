@@ -255,6 +255,16 @@ public class Application {
 				String customerNumber = textField_CustomerNbr.getText();
 				Customer tmpCustomer = controllerCustomer.findCustomer(customerNumber);
 				if(tmpCustomer != null){
+					
+					//controllerOrder.getOrderRegister().deleteOrder(orderNumber);
+					ArrayList<Order> tmpOrder = currentCustomer.getOrders();
+					for(Order o: tmpOrder){
+						controllerOrder.getOrderRegister().deleteOrder(o.getOrderNumber());
+					}
+					
+					//controllerOrder.getOrderRegister().deleteOrder(currentOrder.getOrderNumber());
+					//currentCustomer.deleteOrder(currentOrder.getOrderNumber());
+					
 					controllerCustomer.deleteCustomer(customerNumber);
 					currentCustomer = null;
 					lblResponse.setText("Customer Deleted!");
