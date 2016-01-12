@@ -62,8 +62,25 @@ public class Test {
 			System.out.println(o.getOrderNumber());
 			System.out.println(o.getBelongsTo().getFirstName());
 			
-		}*/
+		}
 		
+		customerRegister.changeCustomerDeliveryAddress("000001", "Marsgatan 3");
+		
+		productRegister.setProductName("Julskinka 250g", "Julmango");
+		productRegister.setProductPrice("Kalvsylta 350g", 12.3);
+		
+		Order o = orderRegister.findOrder("order nr.2");
+		if(o != null){
+			System.out.println("Hittade: " + o.getBelongsTo().getFirstName());
+		}
+		
+		orderRegister.deleteOrder("order nr.2");
+		Order or= orderRegister.findOrder("order nr.2");
+		if(or == null){
+			System.out.println("Fungerar!");
+		
+		}*/
+			
 		for(Order o: customer1.getOrders()){
 			System.out.println(o.getOrderNumber());
 			for(OrderLine ol: o.getOrderLines()){
@@ -86,84 +103,7 @@ public class Test {
 			System.out.println("Totalt pris på ändrat order: " + tmpOrder.getTotalOrderPrice() + " kr");
 		}
 		
-			
-		/*for(OrderLine o: order1.getOrderrader()){
-			System.out.println(o.getLineNumber());
-			System.out.println(o.getProduct().getName());
-			System.out.println(o.getProduct().getPrice());
-			System.out.println(o.getAmount());
-		}
-		*/
 		
-		
-		/*
-		System.out.println(order1.getBelongsTo().getFirstName());
-		System.out.println(order1.getOrderNumber());
-				
-		for(OrderLine o: order1.getOrderrader()){
-			System.out.println(o.getLineNumber());
-			System.out.println(o.getProduct().getName());
-			System.out.println(o.getProduct().getPrice());
-			System.out.println(o.getAmount());
-		*/
-
-			
-		/*
-		Order o = orderregister.findOrder("order1");
-		if(o != null){
-			System.out.println("Hittade: " + o.getOrderNumber());
-		}
-		
-		orderregister.deleteOrder("order1");
-		Order or= orderregister.findOrder("order1");
-		if(or == null){
-			System.out.println("Fungerar!");
-		}*/
-		
-		/*kundregister.changeCustomerDAddress("0001", "Marsgatan 3");
-		
-		for(Customer c: kundregister.getCustomers()){
-			System.out.println(c.getFirstName());
-			System.out.println(c.getDeliveryAddress());
-			
-		}*/
-		/*
-		produktregister.setProductName("Julskinka 250g", "Julmango");
-		produktregister.setProductPrice("Kalvsylta 350g", 12.3);
-		
-		for(Product p: produktregister.getProdukter()){
-			System.out.println(p.getName());
-			System.out.println(p.getPrice());
-		}
-		
-		/*order1.changeOrderLine("orderrad 2.", 50);
-		order1.changeOrder("Orderrad 1", 34);
-		
-		for(OrderLine o: order1.getOrderrader()){
-			System.out.println(o.getLineNumber());
-			System.out.println(o.getAmount());
-		}
-		*/
-		
-		/*for(Order o: orderRegister.getOrders()){
-			System.out.println(o.getOrderNumber());
-			System.out.println(o.getBelongsTo().getFirstName());
-			
-		}
-		
-		
-			customerRegister.setCustomer("000001", "Chaima", "Tebini", "6575", "malmö");
-			
-			Customer a =customerRegister.findCustomer("000001");
-			System.out.println(a.getFirstName());
-			System.out.println(a.getLastName());
-			System.out.println(a.getDeliveryAddress());*/
-		
-		Order o = orderRegister.findOrder("order1");
-		if(o != null){
-			System.out.println("Hittade: " + o.getOrderNumber());
-		}
-		
-		}
 	}
+}
 
