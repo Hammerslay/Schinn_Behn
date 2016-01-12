@@ -41,7 +41,7 @@ public class CustomerRegister {
 	           c.setDeliveryAddress(newDeliveryAddress);
 	    }
 	}
-	public void changeCustomerDAddress(String customerNumber, String newDAddress) { 
+	public void changeCustomerDeliveryAddress(String customerNumber, String newDAddress) { 
 		Customer c = this.findCustomer(customerNumber);
 		if (c != null) {
 	           c.setDeliveryAddress(newDAddress);
