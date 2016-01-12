@@ -234,13 +234,13 @@ public class Application {
 					lblResponse.setText("Add error!");
 					lblResponse.setForeground(Color.red);
 				}else{
-				String customerNumber = controllerCustomer.generateNewCustomerNumber();//textField_CustomerNbr.getText();
+				String customerNumber = controllerCustomer.generateNewCustomerNumber();
 				textField_CustomerNbr.setText(customerNumber);
 				String firstName= textField_FirstName.getText();
 				String lastName = textField_LastName.getText();
 				String phoneNumber= textField_PhoneNumber.getText();
 				String deliveryAddress= textField_DeliveryAddress.getText();
-				controllerCustomer.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array h�r ist�llet?
+				controllerCustomer.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); 
 				lblResponse.setText("Stored Successfully!");
 				lblResponse.setForeground(Color.BLUE);
 				currentCustomer = controllerCustomer.findCustomer(customerNumber);
@@ -257,9 +257,6 @@ public class Application {
 				if(tmpCustomer != null){
 					controllerCustomer.deleteCustomer(customerNumber);
 					currentCustomer = null;
-					//currentCustomer.deleteOrder(currentOrder.getOrderNumber());
-					//dlm.removeElement(currentOrder.getOrderNumber());
-					//currentOrder = null;
 					lblResponse.setText("Customer Deleted!");
 					clearText();
 				}
