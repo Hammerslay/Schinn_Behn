@@ -347,42 +347,19 @@ public class Application {
 		JButton btnViewOrder = new JButton("View Order");
 		btnViewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				
 				String tmpOrderNumber = (String) list_Order.getSelectedValue();
-				Order tmpOrder = controllerOrder.getOrderRegister().findOrder(tmpOrderNumber);
+				presentOrder(tmpOrderNumber);
 				
 				double totalOrderPrice = 0;
+			
+				totalOrderPrice += controllerOrder.totalOrderPrice(tmpOrderNumber);
+				String tmpTotalOrderPrice = round.format(totalOrderPrice);
+				textField_TotalPrice.setText(tmpTotalOrderPrice);
+				tabbedPane.setSelectedIndex(1);
+				lblMsg.setText("");	
+						
 				
-				if(tmpOrder != null){
-					currentOrder = tmpOrder;
-					ArrayList<OrderLine> tmpOrderLines = tmpOrder.getOrderLines();
-					
-					int i = 0;
-						for(OrderLine o: tmpOrderLines){
-								
-							Object tmpProductName = o.getProduct().getName();
-							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
-							Object tmpQuantity = o.getQuantity();
-							
-							Object[] tmpObjects= new Object[3];
-							
-							model.addRow(tmpObjects);
-							
-							model.setValueAt(tmpProductName, i, 0);
-							model.setValueAt(tmpProductPrice, i, 1);
-							model.setValueAt(tmpQuantity, i, 2);
-						
-						
-							i++;
-							
-						}
-						totalOrderPrice += controllerOrder.totalOrderPrice(tmpOrderNumber);
-						String tmpTotalOrderPrice = round.format(totalOrderPrice);
-						textField_TotalPrice.setText(tmpTotalOrderPrice);
-						tabbedPane.setSelectedIndex(1);
-						lblMsg.setText("");	
-						
-				}
 			}
 		});
 		btnViewOrder.setBounds(424, 375, 138, 29);
@@ -529,36 +506,18 @@ public class Application {
 		btnFindOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					
+				if(!textField_OrderNumberorder.getText().isEmpty()){
 				String tmpOrderNumber = textField_OrderNumberorder.getText();
-				Order tmpOrder = controllerOrder.getOrderRegister().findOrder(tmpOrderNumber);
 				
-				if(tmpOrder != null){
-					currentOrder = tmpOrder;
-					ArrayList<OrderLine> tmpOrderLines = tmpOrder.getOrderLines();
+				presentOrder(tmpOrderNumber);
 					
-					int i = 0;
-						for(OrderLine o: tmpOrderLines){
-								
-							Object tmpProductName = o.getProduct().getName();
-							Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
-							Object tmpAmount = o.getQuantity();
-							
-							Object[] tmpObjects= new Object[3];
-							
-							model.addRow(tmpObjects);
-							
-							model.setValueAt(tmpProductName, i, 0);
-							model.setValueAt(tmpProductPrice, i, 1);
-							model.setValueAt(tmpAmount, i, 2);
-							
-							i++;
-						}
-				}
-				else{
-					lblMsg.setForeground(Color.RED);
-					lblMsg.setText("Order not found!");
-				}
+				
+			}else{
+				lblMsg.setForeground(Color.RED);
+				lblMsg.setText("Select order number!");
 			}
+		}
+			
 		});
 		btnFindOrder.setBounds(282, 11, 116, 29);
 		panel_Order.add(btnFindOrder);
@@ -572,7 +531,6 @@ public class Application {
 					tmpOrder.setBelongsTo(currentCustomer);
 					
 					int rows = model.getRowCount();
-					
 					
 					for(int i = 0; i < rows; i++){
 						Object[] objects = new Object[3];
@@ -645,6 +603,36 @@ public class Application {
 		lblTotalPrice.setBounds(335, 403, 83, 16);
 		panel_Order.add(lblTotalPrice);
 	}
+	
+	private void presentOrder(String tmpOrderNumber){
+		Order tmpOrder = controllerOrder.getOrderRegister().findOrder(tmpOrderNumber);
+		
+		if(tmpOrder != null){
+			currentOrder = tmpOrder;
+			ArrayList<OrderLine> tmpOrderLines = tmpOrder.getOrderLines();
+			
+			int i = 0;
+				for(OrderLine o: tmpOrderLines){
+						
+					Object tmpProductName = o.getProduct().getName();
+					Object tmpProductPrice = Double.toString(o.getProduct().getPrice());
+					Object tmpAmount = o.getQuantity();
+					
+					Object[] tmpObjects= new Object[3];
+					
+					model.addRow(tmpObjects);
+					
+					model.setValueAt(tmpProductName, i, 0);
+					model.setValueAt(tmpProductPrice, i, 1);
+					model.setValueAt(tmpAmount, i, 2);
+					
+					i++;
+				}
+		
+			}else{
+				lblMsg.setText("Order not found!");
+			}
+		}
 	private void clearText(){
 		textField_CustomerNbr.setText(null);
 		textField_FirstName.setText(null);
@@ -669,4 +657,6 @@ public class Application {
 			model.removeRow(0);
 		}
 	}
+
+	
 }
