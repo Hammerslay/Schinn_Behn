@@ -28,9 +28,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.awt.event.ItemEvent;
 
-public class CustomerApplication {
+public class Application {
 
-	private JFrame frmCustomer;
+	private JFrame frame;
 	private JLabel lblResponse;
 	private JTextField textField_CustomerNbr;
 	private JTextField textField_FirstName;
@@ -45,11 +45,8 @@ public class CustomerApplication {
 	private JLabel lblMsg;
 	private JList list_Order;
 	
-	private Controller controller;
-	private CustomerRegister customerRegister;
-	private ProductRegister productRegister; //Jakob la till
-	private OrderRegister orderRegister;
-	
+	private ControllerCustomer controllerCustomer;
+	private ControllerOrder controllerOrder;
 	private Customer currentCustomer;
 	private Order currentOrder;
 	
@@ -69,8 +66,8 @@ public class CustomerApplication {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerApplication window = new CustomerApplication();
-					window.frmCustomer.setVisible(true);
+					Application window = new Application();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,7 +78,7 @@ public class CustomerApplication {
 	/**
 	 * Create the application.
 	 */
-	public CustomerApplication() {
+	public Application() {
 		initialize();
 	}
 	
@@ -105,22 +102,20 @@ public class CustomerApplication {
 			// If Nimbus is not available, you can set the GUI to another look and feel.
 		}*/
 		
-		frmCustomer = new JFrame();
-		frmCustomer.setTitle("Schinn & Behn AB");
-		frmCustomer.setBounds(100, 100, 621, 521);
-		frmCustomer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame();
+		frame.setTitle("Schinn & Behn AB");
+		frame.setBounds(100, 100, 621, 521);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		customerRegister = new CustomerRegister();
-		productRegister = new ProductRegister(); //Jakob la till
-		orderRegister = new OrderRegister();
-		controller = new Controller(customerRegister, productRegister, orderRegister, frmCustomer);
-		frmCustomer.getContentPane().setLayout(null);
+		controllerCustomer= new ControllerCustomer(frame);
+		controllerOrder = new ControllerOrder(frame);
+		frame.getContentPane().setLayout(null);
 		
 		currentCustomer  = null;
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(6, 6, 609, 487);
-		frmCustomer.getContentPane().add(tabbedPane);
+		frame.getContentPane().add(tabbedPane);
 		
 		JPanel panel_Customer = new JPanel();
 		tabbedPane.addTab("Customer", null, panel_Customer, null);
@@ -189,7 +184,7 @@ public class CustomerApplication {
 				
 					if(!tmpCustomerNumber.isEmpty()){
 						lblResponse.setText("");
-						Customer tmpCustomer = controller.findCustomer(tmpCustomerNumber);
+						Customer tmpCustomer = controllerCustomer.findCustomer(tmpCustomerNumber);
 						
 						if(tmpCustomer != null){
 							currentCustomer = tmpCustomer;
@@ -210,7 +205,7 @@ public class CustomerApplication {
 					}
 					else if(!tmpOrderNumber.isEmpty()){
 							
-						Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
+						Order tmpOrder = controllerOrder.getOrderRegister().findOrder(tmpOrderNumber);
 						
 						if(tmpOrder!=null){
 							currentCustomer = tmpOrder.getBelongsTo();
@@ -239,16 +234,16 @@ public class CustomerApplication {
 					lblResponse.setText("Add error!");
 					lblResponse.setForeground(Color.red);
 				}else{
-				String customerNumber = controller.generateNewCustomerNumber();//textField_CustomerNbr.getText();
+				String customerNumber = controllerCustomer.generateNewCustomerNumber();//textField_CustomerNbr.getText();
 				textField_CustomerNbr.setText(customerNumber);
 				String firstName= textField_FirstName.getText();
 				String lastName = textField_LastName.getText();
 				String phoneNumber= textField_PhoneNumber.getText();
 				String deliveryAddress= textField_DeliveryAddress.getText();
-				controller.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array h�r ist�llet?
+				controllerCustomer.addCustomer(customerNumber, firstName, lastName, phoneNumber, deliveryAddress); //Kanske skicka in en array h�r ist�llet?
 				lblResponse.setText("Stored Successfully!");
 				lblResponse.setForeground(Color.BLUE);
-				currentCustomer = controller.findCustomer(customerNumber);
+				currentCustomer = controllerCustomer.findCustomer(customerNumber);
 			}
 			}});
 		btnAddCustomer.setBounds(173, 375, 150, 29);
@@ -258,9 +253,9 @@ public class CustomerApplication {
 		btnDeleteCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String customerNumber = textField_CustomerNbr.getText();
-				Customer tmpCustomer = controller.findCustomer(customerNumber);
+				Customer tmpCustomer = controllerCustomer.findCustomer(customerNumber);
 				if(tmpCustomer != null){
-					controller.deleteCustomer(customerNumber);
+					controllerCustomer.deleteCustomer(customerNumber);
 					currentCustomer = null;
 					//currentCustomer.deleteOrder(currentOrder.getOrderNumber());
 					//dlm.removeElement(currentOrder.getOrderNumber());
@@ -277,14 +272,14 @@ public class CustomerApplication {
 		btnUpdateCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cNumber= textField_CustomerNbr.getText();
-				Customer tmpCustomer = controller.findCustomer(cNumber);
+				Customer tmpCustomer = controllerCustomer.findCustomer(cNumber);
 				if(tmpCustomer != null){
 					lblResponse.setText("");
 					String newFirstName = textField_FirstName.getText();
 					String newLastName= textField_LastName.getText();
 					String newPhoneNumber= textField_PhoneNumber.getText();
 					String newDeliveryAddress = textField_DeliveryAddress.getText();
-					controller.updateCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
+					controllerCustomer.updateCustomer(cNumber, newFirstName, newLastName, newPhoneNumber, newDeliveryAddress);
 				}else{
 					lblResponse.setText("Customer not found!");
 				}
@@ -347,7 +342,7 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 			
 				String tmpOrderNumber = (String) list_Order.getSelectedValue();
-				Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
+				Order tmpOrder = controllerOrder.getOrderRegister().findOrder(tmpOrderNumber);
 				
 				double totalOrderPrice = 0;
 				
@@ -374,7 +369,7 @@ public class CustomerApplication {
 							i++;
 							
 						}
-						totalOrderPrice += controller.totalOrderPrice(tmpOrderNumber);
+						totalOrderPrice += controllerOrder.totalOrderPrice(tmpOrderNumber);
 						String tmpTotalOrderPrice = round.format(totalOrderPrice);
 						textField_TotalPrice.setText(tmpTotalOrderPrice);
 						tabbedPane.setSelectedIndex(1);
@@ -393,7 +388,7 @@ public class CustomerApplication {
 		tabbedPane.addTab("Order", null, panel_Order, null);
 		panel_Order.setLayout(null);
 		
-		comboBox_Product = new JComboBox(controller.getProductNames());
+		comboBox_Product = new JComboBox(controllerOrder.getProductNames());
 	
 		comboBox_Product.setSelectedIndex(3);
 		
@@ -401,7 +396,7 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 				
 				int x = comboBox_Product.getSelectedIndex(); 
-				String tmpUnitPrice = round.format(controller.getProductPrices().get(x));
+				String tmpUnitPrice = round.format(controllerOrder.getProductPrices().get(x));
 				textField_Price.setText(tmpUnitPrice);
 			}
 		});
@@ -530,7 +525,7 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent arg0) {
 					
 				String tmpOrderNumber = textField_OrderNumberorder.getText();
-				Order tmpOrder = controller.getOrderRegister().findOrder(tmpOrderNumber);
+				Order tmpOrder = controllerOrder.getOrderRegister().findOrder(tmpOrderNumber);
 				
 				if(tmpOrder != null){
 					currentOrder = tmpOrder;
@@ -568,7 +563,7 @@ public class CustomerApplication {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(currentCustomer != null){
-					Order tmpOrder = new Order(controller.generateNewOrderNumber(),currentCustomer);
+					Order tmpOrder = new Order(controllerOrder.generateNewOrderNumber(),currentCustomer);
 					tmpOrder.setBelongsTo(currentCustomer);
 					
 					int rows = model.getRowCount();
@@ -584,13 +579,13 @@ public class CustomerApplication {
 						String tmpPrice = (String)objects[1];
 						String tmpQuantity = (String)objects[2];
 						
-						Product tmpProduct = controller.getProductRegister().find(tmpProductName);
+						Product tmpProduct = controllerOrder.getProductRegister().find(tmpProductName);
 						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));//Chaima undrar?
 						tmpOrder.addOrderLine(tmpOrderLine);
 					
 					}
 					
-					controller.getOrderRegister().addOrder(tmpOrder); //L�gger till ordern i det STORA orderregistret som h�ller ALLAS ordrar.
+					controllerOrder.getOrderRegister().addOrder(tmpOrder); //L�gger till ordern i det STORA orderregistret som h�ller ALLAS ordrar.
 					currentCustomer.addOrder(tmpOrder); //L�gger till ordern hos den specifika kundens orderregister s� att det g�r att hitta ordern genom kunden.
 					
 					dlm.addElement(tmpOrder.getOrderNumber());
@@ -617,7 +612,7 @@ public class CustomerApplication {
 		btnDeleteOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(currentOrder != null){
-					controller.getOrderRegister().deleteOrder(currentOrder.getOrderNumber());
+					controllerOrder.getOrderRegister().deleteOrder(currentOrder.getOrderNumber());
 					currentCustomer.deleteOrder(currentOrder.getOrderNumber());
 					dlm.removeElement(currentOrder.getOrderNumber());
 					clearOrder();
