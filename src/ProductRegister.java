@@ -11,16 +11,16 @@ public class ProductRegister {
 	public void setProducts(ArrayList<Product> produkter) {
 		this.products = produkter;
 	}
-	public void add(Product newProduct){
+	public void addProduct(Product newProduct){
 		products.add(newProduct);
 	}
-	public void delete(String name){
-		Product p = find(name);
+	public void deleteProduct(String name){
+		Product p = findProduct(name);
 		if(p != null){
 			products.remove(p);
 		}
 	}
-	public Product find(String name){
+	public Product findProduct(String name){
 		for(Product p : products){
 			if(p.getName().equals(name)){
 				return p;
@@ -29,13 +29,13 @@ public class ProductRegister {
 		return null;
 	}
 	public void setProductName(String productName, String newName) { 
-		Product p = this.find(productName);
+		Product p = this.findProduct(productName);
 		if (p != null) {
 	        p.setName(newName);
 		}
 	}
 	public void setProductPrice(String productName, double newPrice) { 
-		Product p = this.find(productName);
+		Product p = this.findProduct(productName);
 		if (p != null) {
 			p.setPrice(newPrice);
 		}

@@ -579,7 +579,7 @@ public class Application {
 						String tmpPrice = (String)objects[1];
 						String tmpQuantity = (String)objects[2];
 						
-						Product tmpProduct = controllerOrder.getProductRegister().find(tmpProductName);
+						Product tmpProduct = controllerOrder.getProductRegister().findProduct(tmpProductName);
 						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));//Chaima undrar?
 						tmpOrder.addOrderLine(tmpOrderLine);
 					

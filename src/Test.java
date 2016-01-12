@@ -18,10 +18,10 @@ public class Test {
 		customerRegister.addCustomer(customer1);
 		customerRegister.addCustomer(customer2);
 		
-		productRegister.add(product1);
-		productRegister.add(product2);
-		productRegister.add(product3);
-		productRegister.add(product4);
+		productRegister.addProduct(product1);
+		productRegister.addProduct(product2);
+		productRegister.addProduct(product3);
+		productRegister.addProduct(product4);
 		
 		OrderLine orderLine2= new OrderLine("Orderrad 2.",product3, 4);
 		OrderLine orderLine1 = new OrderLine("Orderrad 1", product4, 2);

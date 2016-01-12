@@ -23,10 +23,10 @@ public class ControllerOrder {
 			orderNumbers.add(Integer.toString(i));
 		}
 		
-		productRegister.add(new Product("Prinskorv 250g", 234.90));
-		productRegister.add(new Product("Offerlamm 500g", 546.80));
-		productRegister.add(new Product("Leverkorv 350g", 160.50));
-		productRegister.add(new Product("", 0));
+		productRegister.addProduct(new Product("Prinskorv 250g", 234.90));
+		productRegister.addProduct(new Product("Offerlamm 500g", 546.80));
+		productRegister.addProduct(new Product("Leverkorv 350g", 160.50));
+		productRegister.addProduct(new Product("", 0));
 	}
 	public ProductRegister getProductRegister() {
 		return productRegister;
