@@ -370,9 +370,7 @@ public class Application {
 						String tmpTotalOrderPrice = round.format(totalOrderPrice);
 						textField_TotalPrice.setText(tmpTotalOrderPrice);
 						tabbedPane.setSelectedIndex(1);
-						lblMsg.setText("");
-						
-						
+						lblMsg.setText("");	
 						
 				}
 			}
@@ -454,7 +452,7 @@ public class Application {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(textField_Quantity.getText().equals("") && textField_Price.getText().equals("")){
+				if(textField_Quantity.getText().isEmpty() && textField_Price.getText().isEmpty()){
 					lblMsg.setText("Select Product and Quantity!");
 				}
 				else if(textField_Quantity.getText().equals("")){
@@ -577,7 +575,7 @@ public class Application {
 						String tmpQuantity = (String)objects[2];
 						
 						Product tmpProduct = controllerOrder.getProductRegister().findProduct(tmpProductName);
-						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));//Chaima undrar?
+						OrderLine tmpOrderLine = new OrderLine(Integer.toString(i+1), tmpProduct, Integer.parseInt(tmpQuantity));
 						tmpOrder.addOrderLine(tmpOrderLine);
 					
 					}
