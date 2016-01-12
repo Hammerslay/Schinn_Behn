@@ -93,13 +93,10 @@ public class Application {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
 		            UIManager.setLookAndFeel(info.getClassName());
-		            //break;
 		        }
 		    }
 		} catch (Exception e) {
 		   
-			//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			// If Nimbus is not available, you can set the GUI to another look and feel.
 		}*/
 		
 		frame = new JFrame();
@@ -199,9 +196,7 @@ public class Application {
 								dlm.addElement(tmp.getOrderNumber());
 							}
 						}
-						else{
-							
-						}
+						
 					}
 					else if(!tmpOrderNumber.isEmpty()){
 							
@@ -221,6 +216,10 @@ public class Application {
 								dlm.addElement(tmp.getOrderNumber());
 							}
 						}		
+					}else{
+						lblResponse.setText("Select customer number or order number!");
+						
+						
 					}
 				}
 		});
@@ -254,16 +253,13 @@ public class Application {
 			public void actionPerformed(ActionEvent e) {
 				String customerNumber = textField_CustomerNbr.getText();
 				Customer tmpCustomer = controllerCustomer.findCustomer(customerNumber);
+			
 				if(tmpCustomer != null){
 					
-					//controllerOrder.getOrderRegister().deleteOrder(orderNumber);
 					ArrayList<Order> tmpOrder = currentCustomer.getOrders();
 					for(Order o: tmpOrder){
 						controllerOrder.getOrderRegister().deleteOrder(o.getOrderNumber());
 					}
-					
-					//controllerOrder.getOrderRegister().deleteOrder(currentOrder.getOrderNumber());
-					//currentCustomer.deleteOrder(currentOrder.getOrderNumber());
 					
 					controllerCustomer.deleteCustomer(customerNumber);
 					currentCustomer = null;
@@ -278,8 +274,10 @@ public class Application {
 		JButton btnUpdateCustomer = new JButton("Update Customer");
 		btnUpdateCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				String cNumber= textField_CustomerNbr.getText();
 				Customer tmpCustomer = controllerCustomer.findCustomer(cNumber);
+				
 				if(tmpCustomer != null){
 					lblResponse.setText("");
 					String newFirstName = textField_FirstName.getText();
@@ -307,7 +305,7 @@ public class Application {
 		
 		lblResponse= new JLabel("");
 		lblResponse.setForeground(Color.BLUE);
-		lblResponse.setBounds(16, 337, 156, 21);
+		lblResponse.setBounds(16, 337, 415, 21);
 		panel_Customer.add(lblResponse);
 		
 		JSeparator separator = new JSeparator();
@@ -330,12 +328,15 @@ public class Application {
 		JButton btnPlaceOrder = new JButton("Place Order");
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(currentCustomer!=null){
+				
+				if(currentCustomer!= null){
+					
 					lblResponse.setText(null);
 					lblMsg.setText(null);
 					tabbedPane.setSelectedIndex(1);
 				}
 				else{
+					
 					lblResponse.setForeground(Color.RED);
 					lblResponse.setText("No customer selected!");
 				}
@@ -357,8 +358,7 @@ public class Application {
 				String tmpTotalOrderPrice = round.format(totalOrderPrice);
 				textField_TotalPrice.setText(tmpTotalOrderPrice);
 				tabbedPane.setSelectedIndex(1);
-				lblMsg.setText("");	
-						
+				lblMsg.setText("");				
 				
 			}
 		});
@@ -442,21 +442,21 @@ public class Application {
 				if(textField_Quantity.getText().isEmpty() && textField_Price.getText().isEmpty()){
 					lblMsg.setText("Select Product and Quantity!");
 				}
-				else if(textField_Quantity.getText().equals("")){
+				else if(textField_Quantity.getText().isEmpty()){
 					lblMsg.setText("Select Quantity!");
 				}
-				else if(textField_Quantity.getText().equals("")){
+				else if(textField_Quantity.getText().isEmpty()){
 					lblMsg.setText("Select Product!");
 				}
 				else{
-					lblMsg.setText(""); 
+					lblMsg.setText(null); 
+					
 					row[0]= comboBox_Product.getSelectedItem();
 					row[1]= textField_Price.getText();
 					row[2]= textField_Quantity.getText();
 					model.addRow(row);
 					
-					lblMsg.setText(null);
-					textField_Quantity.setText("");
+					textField_Quantity.setText(null);
 					
 				}
 			}
@@ -470,7 +470,7 @@ public class Application {
 				
 				int i =table.getSelectedRow();
 				if(i >=0){
-					lblMsg.setText("");
+					lblMsg.setText(null);
 					model.removeRow(i);
 				}
 				else{
@@ -489,7 +489,7 @@ public class Application {
 				
 				if(i>=0)
 				{
-					lblMsg.setText("");
+					lblMsg.setText(null);
 					model.setValueAt(comboBox_Product.getSelectedItem(), i, 0);
 					model.setValueAt(textField_Price.getText(), i, 1);
 					model.setValueAt(textField_Quantity.getText(), i, 2);
@@ -511,8 +511,8 @@ public class Application {
 				
 				presentOrder(tmpOrderNumber);
 					
-				
 			}else{
+				
 				lblMsg.setForeground(Color.RED);
 				lblMsg.setText("Select order number!");
 			}
@@ -642,7 +642,6 @@ public class Application {
 		textField_OrderNumber.setText(null);
 		lblMsg.setText(null);
 		dlm.clear();
-		list_Order.setModel(dlm);
 		clearOrder();
 	}
 	private void clearOrder() {
